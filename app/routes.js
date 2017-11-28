@@ -1,13 +1,16 @@
 var Card = require('../app/models/card');
+var News = require('../app/models/news');
+var FroalaEditor = require('../node_modules/froala-editor/js/froala_editor.min.js');
 
 
 module.exports = function (app, passport) {
 
-    app.get('/',function (req, res) {
+    app.get('/', function (req, res) {
         res.render('index.ejs');
     });
 
-    app.get('/all', isLoggedIn,  function (req, res) {
+    //Minden kártya kiirása
+    app.get('/all', function (req, res) {
         Card.find(function (err, itms) {
             if (err) {
                 console.log(err);
@@ -15,6 +18,34 @@ module.exports = function (app, passport) {
             else {
                 res.render('card.ejs', { itms: itms });
             }
+        });
+    });
+
+    //Hír szerkeztő
+    app.get('/news', function (req, res) {
+        res.render('news.ejs');
+    });
+
+    app.post('/news/save', function (req, res, err) {
+        if (err) return console.log(err);
+
+        var today = new Date();
+
+        //Bob now exists, so lets create a story
+        var news = new News({
+            ID: 5,
+            Cím: "teszt cím",
+            Dátum: today.getDate(),
+            Tartalom: req.body,
+            Szerző: req.user._id,
+            Publikálva: false
+        });
+
+        news.save(function (err) {
+            if (err)
+            res.send(err);
+
+            res.json({ message: news });
         });
     });
 
