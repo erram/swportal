@@ -26,8 +26,7 @@ module.exports = function (app, passport) {
         res.render('news.ejs');
     });
 
-    app.post('/news/save', function (req, res, err) {
-        if (err) return console.log(err);
+    app.post('/news/save', isLoggedIn, function (req, res) {
 
         var today = new Date();
 
@@ -44,8 +43,6 @@ module.exports = function (app, passport) {
         news.save(function (err) {
             if (err)
             res.send(err);
-
-            res.json({ message: news });
         });
     });
 
