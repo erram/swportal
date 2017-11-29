@@ -1,3 +1,9 @@
 @import "reset";
 @import "mixins";
 @import "header";
+
+body {
+  background: url(http://mk.deltavision.hu/wp-content/uploads/2015/10/background.png);
+  background-position: 0 0;
+  background-repeat: repeat;
+}

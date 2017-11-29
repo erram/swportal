@@ -81,63 +81,120 @@ hr {
 input, select {
   vertical-align: middle; }
 
-.site-navigation {
-  background: #212121;
-  position: fixed;
-  z-index: 500;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #323232;
-  box-shadow: 1px -1px 13px 7px rgba(0, 0, 0, 0.5);
-  max-height: 40px; }
-  .site-navigation nav ul {
-    text-align: center; }
-    .site-navigation nav ul::after {
+/*-- BREAKPOINTS --*/
+@media (min-width: 1000px) {
+  .site-navigation {
+    background: #212121;
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #323232;
+    box-shadow: 1px -1px 13px 7px rgba(0, 0, 0, 0.5);
+    max-height: 40px; }
+    .site-navigation .mobile-nav {
+      display: none; }
+    .site-navigation nav ul {
+      text-align: center; }
+      .site-navigation nav ul::after {
+        display: block;
+        content: "";
+        clear: both; }
+      .site-navigation nav ul li {
+        position: relative;
+        display: inline-block;
+        padding: 10px;
+        transition: all 200ms;
+        color: #428bca; }
+        .site-navigation nav ul li:hover {
+          color: #92bce0; }
+          .site-navigation nav ul li:hover .dropdown {
+            display: block; }
+        .site-navigation nav ul li a {
+          text-transform: uppercase;
+          line-height: 18px;
+          font-weight: normal;
+          font-style: normal;
+          font-size: 16px;
+          transition: color 200ms; }
+        .site-navigation nav ul li .dropdown {
+          position: absolute;
+          z-index: 599;
+          display: none;
+          top: 100%;
+          left: 0;
+          background: #fff;
+          border-bottom: 0;
+          margin: 0;
+          padding: 0;
+          width: 200px;
+          border-left: 1px solid #f2f2f2;
+          border-right: 1px solid #f2f2f2;
+          border-top: 1px solid #f2f2f2; }
+          .site-navigation nav ul li .dropdown li {
+            display: block;
+            border-bottom: 1px solid #f2f2f2;
+            text-align: left; }
+            .site-navigation nav ul li .dropdown li a {
+              font-size: 12px;
+              color: #555; }
+              .site-navigation nav ul li .dropdown li a:hover {
+                color: #428bca; } }
+
+@media (max-width: 1000px) {
+  .site-navigation {
+    background: #212121;
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #323232;
+    box-shadow: 1px -1px 13px 7px rgba(0, 0, 0, 0.5);
+    max-height: 40px; }
+    .site-navigation .mobile-nav {
       display: block;
-      content: "";
-      clear: both; }
-    .site-navigation nav ul > li {
-      position: relative;
-      display: inline-block;
       padding: 10px;
-      transition: all 200ms;
+      text-align: center;
       color: #428bca; }
-      .site-navigation nav ul > li:hover {
-        color: #92bce0; }
-        .site-navigation nav ul > li:hover .dropdown {
-          display: block;
-          opacity: 1; }
-      .site-navigation nav ul > li a {
-        text-transform: uppercase;
-        line-height: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-size: 16px;
-        transition: color 200ms; }
-      .site-navigation nav ul > li .dropdown {
-        position: absolute;
-        z-index: 599;
-        display: none;
-        top: 100%;
-        left: 0;
-        background: #fff;
-        border-bottom: 0;
-        margin: 0;
-        padding: 0;
-        width: 200px;
-        border-left: 1px solid #f2f2f2;
-        border-right: 1px solid #f2f2f2;
-        border-top: 1px solid #f2f2f2;
-        opacity: 0;
-        transition: opacity 300ms; }
-        .site-navigation nav ul > li .dropdown li {
-          display: block;
-          border-bottom: 1px solid #f2f2f2;
-          text-align: left; }
-          .site-navigation nav ul > li .dropdown li a {
-            font-size: 12px;
-            color: #555; }
-            .site-navigation nav ul > li .dropdown li a:hover {
-              color: #428bca; }
+    .site-navigation nav.open ul {
+      display: block; }
+    .site-navigation nav ul {
+      position: absolute;
+      display: none;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      text-align: center; }
+      .site-navigation nav ul li {
+        display: block;
+        padding: 10px;
+        background: #323232;
+        border-bottom: 1px solid #656565; }
+        .site-navigation nav ul li.dd {
+          position: relative; }
+          .site-navigation nav ul li.dd:after {
+            display: inline-block;
+            color: #428bca;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            content: '\f078';
+            position: absolute;
+            top: 10px;
+            right: 10px; }
+        .site-navigation nav ul li.open .dropdown {
+          display: block; }
+        .site-navigation nav ul li .dropdown {
+          display: none;
+          position: relative;
+          top: 10px; }
+          .site-navigation nav ul li .dropdown li {
+            background: #fff; } }
+
+body {
+  background: url(http://mk.deltavision.hu/wp-content/uploads/2015/10/background.png);
+  background-position: 0 0;
+  background-repeat: repeat; }
