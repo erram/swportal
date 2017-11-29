@@ -1,6 +1,6 @@
 var app = require("../../app")
 var isLoggedIn = require("../utils/auth")
-var News = require('../models/news')
+var News = require('../models/newsitems')
 
 //Hír szerkeztő
 app.get("/news", isLoggedIn, function(req, res) {
