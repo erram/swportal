@@ -15,7 +15,30 @@
     </div>
     
     <div class="row">
-        <% for(var i=0; i < news.length; i++) { %><a href="/news/item/<%= news[i].ID; %>"><span><%= news[i].Cím %></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<% } %>    
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Postolta</th>
+      <th>Cím</th>
+      <th>Dátum</th>
+      <th>Státusz</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% for(var i=0; i < news.length; i++) { %>
+    <tr>
+        <td><%= news[i].ID %></td>
+        <td><%= usr %></td>
+        <td><a href="/news/item/<%= news[i].ID; %>"><span><%= news[i].Cím %></span></a></td>
+        <td><%=  moment(news[i].Dátum).format('MMM-DD-YYYY') %></td>  
+        <td><%= news[i].Publikálva %></td>   
+    </tr>
+    <% } %>    
+  </tbody>
+</table>
+        
     </div>
 </div>
 </body>
