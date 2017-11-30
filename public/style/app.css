@@ -82,6 +82,24 @@ input, select {
   vertical-align: middle; }
 
 /*-- BREAKPOINTS --*/
+.text-link {
+  color: inherit;
+  transition: color 200ms; }
+  .text-link:hover {
+    text-decoration: none;
+    color: #428bca; }
+
+p {
+  margin-bottom: 1em;
+  line-height: 1.2; }
+  p:last-child {
+    margin-bottom: 0; }
+
+h5 {
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1em; }
+
 @media (min-width: 1000px) {
   .site-navigation {
     background: #212121;
@@ -193,6 +211,101 @@ input, select {
           top: 10px; }
           .site-navigation nav ul li .dropdown li {
             background: #fff; } }
+
+#main-content {
+  background: #ecedef;
+  margin-top: 70px;
+  padding: 10px; }
+
+.site-footer {
+  margin: 10px 0;
+  position: relative;
+  bottom: 0; }
+  .site-footer .container {
+    background: #212121;
+    color: #555;
+    padding: 20px; }
+    @media (max-width: 1000px) {
+      .site-footer .container .fb-embed {
+        margin-bottom: 10px;
+        text-align: center; } }
+    .site-footer .container .footer-box {
+      padding: 0 10px; }
+      @media (max-width: 1000px) {
+        .site-footer .container .footer-box {
+          margin-bottom: 10px;
+          text-align: center; } }
+
+/* Slider */
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent; }
+
+.slick-list {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0; }
+  .slick-list:focus {
+    outline: none; }
+  .slick-list.dragging {
+    cursor: pointer;
+    cursor: hand; }
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+.slick-track {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+  .slick-track:before, .slick-track:after {
+    content: "";
+    display: table; }
+  .slick-track:after {
+    clear: both; }
+  .slick-loading .slick-track {
+    visibility: hidden; }
+
+.slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  display: none; }
+  [dir="rtl"] .slick-slide {
+    float: right; }
+  .slick-slide img {
+    display: block; }
+  .slick-slide.slick-loading img {
+    display: none; }
+  .slick-slide.dragging img {
+    pointer-events: none; }
+  .slick-initialized .slick-slide {
+    display: block; }
+  .slick-loading .slick-slide {
+    visibility: hidden; }
+  .slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent; }
+
+.slick-arrow.slick-hidden {
+  display: none; }
 
 body {
   background: url(http://mk.deltavision.hu/wp-content/uploads/2015/10/background.png);

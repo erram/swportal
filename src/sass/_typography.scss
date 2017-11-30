@@ -1,0 +1,24 @@
+.text-link {
+  color: inherit;
+  transition: color 200ms;
+
+  &:hover {
+    text-decoration: none;
+    color: #428bca;
+  }
+}
+
+p {
+  margin-bottom: 1em;
+  line-height: 1.2;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h5 {
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1em;
+}

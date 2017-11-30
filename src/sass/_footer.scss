@@ -1,0 +1,27 @@
+.site-footer {
+  margin: 10px 0;
+  position: relative;
+  bottom: 0;
+
+  .container {
+    background: #212121;
+    color: #555;
+    padding: 20px;
+
+    .fb-embed {
+      @include max-tablet {
+        margin-bottom: 10px;
+        text-align: center;
+      }
+    }
+
+    .footer-box {
+      padding: 0 10px;
+
+      @include max-tablet{
+        margin-bottom: 10px;
+        text-align: center;
+      }
+    }
+  }
+}
