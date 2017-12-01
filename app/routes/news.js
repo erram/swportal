@@ -34,13 +34,13 @@ app.get("/news/item/:id", function (req, res) {
 })
 
 app.post("/news/save", isLoggedIn, function (req, res) {
-  var today = new Date()
-
-  //Bob now exists, so lets create a story
+  var dateTime = require('node-datetime')
+  var dt = dateTime.create()
+  var formatted = dt.format('Y-m-d H:M:S')
   var news = new News({
     ID: 5,
     Cím: "teszt cím",
-    Dátum: today.getDate(),
+    Dátum: formatted,
     Tartalom: req.body.content,
     Szerző: req.user._id,
     Publikálva: false
