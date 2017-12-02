@@ -101,6 +101,13 @@ h5 {
   line-height: 1.2;
   margin-bottom: 1em; }
 
+.horizontal-list li {
+  float: left;
+  margin-right: 10px;
+  list-style-type: none; }
+  .horizontal-list li:last-child {
+    margin-right: 0; }
+
 @media (min-width: 1000px) {
   .site-navigation {
     background: #212121;
@@ -236,6 +243,25 @@ h5 {
         .site-footer .container .footer-box {
           margin-bottom: 10px;
           text-align: center; } }
+  .site-footer .footnote {
+    font-size: 12px;
+    margin-top: 20px;
+    text-align: center; }
+    @media (min-width: 1000px) {
+      .site-footer .footnote {
+        text-align: left; } }
+    .site-footer .footnote ul li {
+      list-style-type: none;
+      margin-top: 12px; }
+    @media (min-width: 1000px) {
+      .site-footer .footnote ul {
+        float: right; }
+        .site-footer .footnote ul li {
+          margin-top: 0;
+          float: left;
+          margin-right: 10px; }
+          .site-footer .footnote ul li:last-child {
+            margin-right: 0; } }
 
 /* Slider */
 .slick-slider {

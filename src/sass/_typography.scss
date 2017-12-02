@@ -22,3 +22,15 @@ h5 {
   line-height: 1.2;
   margin-bottom: 1em;
 }
+
+.horizontal-list {
+  li {
+    float: left;
+    margin-right: 10px;
+    list-style-type: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
