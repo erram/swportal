@@ -83,10 +83,10 @@ input, select {
   vertical-align: middle; }
 
 /*-- BREAKPOINTS --*/
-.text-link {
+.text-link, .article-container .article a {
   color: inherit;
   transition: color 200ms; }
-  .text-link:hover {
+  .text-link:hover, .article-container .article a:hover {
     text-decoration: none;
     color: #428bca; }
 
@@ -224,6 +224,9 @@ h5 {
   background: #ecedef;
   margin-top: 70px;
   padding: 10px; }
+  @media (min-width: 496px) {
+    #main-content {
+      padding: 20px; } }
 
 .site-footer {
   margin: 10px 0;
@@ -457,8 +460,109 @@ h5 {
       color: black;
       opacity: 0.75; }
 
+@media (max-width: 496px) {
+  .hero-rotator {
+    display: none; } }
+
 .hero-rotator .slick-slide img {
   width: 100%; }
+
+.article-container::after {
+  display: block;
+  content: "";
+  clear: both; }
+
+.article-container .article {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px; }
+  @media (min-width: 496px) {
+    .article-container .article.wide {
+      width: 100%; } }
+  .article-container .article .image-content {
+    text-align: center; }
+    .article-container .article .image-content a {
+      width: 100%;
+      display: inline-block; }
+    .article-container .article .image-content img {
+      width: 100%; }
+  @media (min-width: 496px) {
+    .article-container .article {
+      width: 48%;
+      float: left; }
+      .article-container .article::after {
+        display: block;
+        content: "";
+        clear: both; }
+      .article-container .article:nth-child(odd) {
+        margin-right: 4%; }
+      .article-container .article .image-content img {
+        width: auto;
+        max-width: 100%; } }
+  @media (min-width: 1000px) {
+    .article-container .article .image-content,
+    .article-container .article .text-content {
+      float: left; }
+    .article-container .article .image-content {
+      text-align: left;
+      width: 30%; }
+    .article-container .article .text-content {
+      width: 70%; } }
+  .article-container .article .title-content {
+    position: relative;
+    margin-bottom: 10px; }
+    .article-container .article .title-content::after {
+      display: block;
+      content: "";
+      clear: both; }
+    .article-container .article .title-content .title {
+      width: 80%;
+      padding: 5px 10px; }
+      .article-container .article .title-content .title h2 {
+        line-height: 24px;
+        font-weight: 700;
+        color: #428bca;
+        font-size: 18px;
+        margin-bottom: 10px; }
+      .article-container .article .title-content .title span {
+        font-size: 11px;
+        margin-right: 5px; }
+        .article-container .article .title-content .title span.publisher:before {
+          font-family: "FontAwesome";
+          content: "\f007";
+          margin-right: 5px; }
+        .article-container .article .title-content .title span.category:before {
+          font-family: "FontAwesome";
+          content: "\f07c";
+          margin-right: 5px; }
+        .article-container .article .title-content .title span.comments:before {
+          font-family: "FontAwesome";
+          content: "\f075";
+          margin-right: 5px; }
+    .article-container .article .title-content .date {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      max-width: 20%;
+      max-height: 60px;
+      float: right;
+      text-align: center;
+      color: #777;
+      background: #f2f2f2;
+      padding: 10px 5px;
+      vertical-align: middle; }
+      .article-container .article .title-content .date span {
+        display: inline-block; }
+      .article-container .article .title-content .date .day {
+        font-size: 24px; }
+      .article-container .article .title-content .date .mo-ye {
+        font-size: 10px;
+        text-transform: uppercase; }
+  .article-container .article .article-lead {
+    padding: 0 10px 10px 10px;
+    line-height: 1.5; }
 
 body {
   background: url(http://mk.deltavision.hu/wp-content/uploads/2015/10/background.png);
