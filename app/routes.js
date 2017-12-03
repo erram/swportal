@@ -10,6 +10,10 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/newl-landing', function(req, res) {
+        res.render('news-landing.ejs');
+    });
+
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
