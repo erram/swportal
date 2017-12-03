@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- Include Font Awesome. -->
+    <link href="/public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <script src="/public/jquery/dist/jquery.min.js"></script>
+
+    <!-- Include Froala Editor styles -->
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/froala_editor.min.css" />
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/froala_style.min.css" />
+
+    <!-- Include Froala Editor Plugins styles -->
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/char_counter.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/code_view.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/colors.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/emoticons.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/file.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/fullscreen.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/image_manager.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/image.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/line_breaker.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/table.css">
+    <link rel="stylesheet" href="/public/froala-wysiwyg-editor/css/plugins/video.css">
+
+    <!-- Include Froala Editor -->
+    <script src="/public/froala-wysiwyg-editor/js/froala_editor.min.js"></script>
+
+    <!-- Include Froala Editor Plugins -->
+    <script src="/public/froala-wysiwyg-editor/js/plugins/align.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/char_counter.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/code_beautifier.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/code_view.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/colors.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/emoticons.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/entities.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/file.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/font_family.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/font_size.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/fullscreen.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/image.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/image_manager.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/inline_style.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/line_breaker.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/link.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/lists.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/paragraph_format.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/paragraph_style.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/quote.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/save.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/table.min.js"></script>
+    <script src="/public/froala-wysiwyg-editor/js/plugins/video.min.js"></script>
+    <!-- End Froala -->
+
+    <style>
+        body {
+            padding-top: 80px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="page-header text-center">
+            <h1>
+                <span class="fa fa-anchor"></span> Hír szerkeztő</h1>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        </div>
+
+        <div class="row">
+            <div class="sample">
+                <h2>Sample 1: Save to disk</h2>
+                <form action="/news/save" method="POST">
+                    <input id="title" name="editor_title"></input>
+                    <textarea id="edit" name="editor_content"></textarea>
+                    <button>Submit</button>
+                </form>
+                <button id="saveButton">Save</button>
+                
+            </div>
+            <script>
+                $(function () {
+                    var titletext = "inittext";
+                    $('#edit').froalaEditor({
+                        imageUploadURL: '/upload_image',
+                        imageUploadParams: {
+                            id: 'my_editor'
+                        },
+
+                        fileUploadURL: '/upload_file',
+                        fileUploadParams: {
+                            id: 'my_editor'
+                        },
+
+                        imageManagerLoadURL: '/load_images',
+                        imageManagerDeleteURL: "/delete_image",
+                        imageManagerDeleteMethod: "POST",
+
+                        // Set the save param.
+                        saveParam: 'content',
+
+                        // Set the save URL.
+                        saveURL: 'news/save',
+
+                        // HTTP request type.
+                        saveMethod: 'POST',
+
+                        // Additional save params.
+                        saveParams: { title: titletext }
+                    })
+                        // Catch image removal from the editor.
+                        .on('froalaEditor.image.removed', function (e, editor, $img) {
+                            $.ajax({
+                                // Request method.
+                                method: "POST",
+
+                                // Request URL.
+                                url: "/delete_image",
+
+                                // Request params.
+                                data: {
+                                    src: $img.attr('src')
+                                }
+                            })
+                                .done(function (data) {
+                                    console.log('image was deleted');
+                                })
+                                .fail(function (err) {
+                                    console.log('image delete problem: ' + JSON.stringify(err));
+                                })
+                        })
+                        // Catch file removal from the editor.
+                        .on('froalaEditor.file.unlink', function (e, editor, link) {
+
+                            $.ajax({
+                                // Request method.
+                                method: "POST",
+
+                                // Request URL.
+                                url: "/delete_file",
+
+                                // Request params.
+                                data: {
+                                    src: link.getAttribute('href')
+                                }
+                            })
+                                .done(function (data) {
+                                    console.log('file was deleted');
+                                })
+                                .fail(function (err) {
+                                    console.log('file delete problem: ' + JSON.stringify(err));
+                                })
+                        })
+                        .on('froalaEditor.save.before', function (e, editor) {
+                            titletext = document.getElementById('title').value
+                            console.log(e)
+                            saveParams: {
+                                lofasz: titletext
+                            }
+                        })
+                        .on('froalaEditor.save.after', function (e, editor, response) {
+                            // After successfully save request.
+                        })
+                        .on('froalaEditor.save.error', function (e, editor, error) {
+                            // Do something here.
+                        })
+                });
+                /*
+                $('#saveButton').click(function () {
+                    $('#edit').froalaEditor('save.save');
+                })*/
+            </script>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

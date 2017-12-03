@@ -1,0 +1,9 @@
+#main-content {
+  background: #ecedef;
+  margin-top: 70px;
+  padding: 10px;
+
+  @include tablet {
+    padding: 20px;
+  }
+}

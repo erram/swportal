@@ -1,0 +1,41 @@
+/*-- BREAKPOINTS --*/
+$bp-x-small  : 319px;  // xSmall (0-319)
+$bp-small    : 320px;  // Small (320-496)
+$bp-medium   : 496px;  // Medium (497-670) - mobile-tablet change
+$bp-medium-l : 670px;  // Medium Large (671-800)
+$bp-large    : 800px;  // Large (801-999)
+$bp-x-large  : 1000px; // xLarge (1000-1280) -tablet-dt change
+$bp-xx-large : 1280px; // xxLarge (1281>)
+$bp-xxx-large: 1492px; // xxxLarge (1476>)
+
+@mixin phone {
+  @media (max-width: #{$bp-medium}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$bp-medium}) {
+    @content;
+  }
+}
+
+@mixin max-tablet {
+  @media (max-width: #{$bp-x-large}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$bp-x-large}) {
+    @content;
+  }
+}
+
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}

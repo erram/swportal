@@ -1,0 +1,17 @@
+@import "reset";
+@import "mixins";
+@import "typography";
+@import "header";
+@import "container";
+@import "footer";
+@import "slick";
+@import "slick-theme";
+@import "article";
+@import "news-landing";
+
+
+body {
+  background: url(http://mk.deltavision.hu/wp-content/uploads/2015/10/background.png);
+  background-position: 0 0;
+  background-repeat: repeat;
+}
