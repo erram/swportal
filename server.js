@@ -19,8 +19,7 @@ mongoose.connect(configDB.url)
 require("./config/passport")(passport) // pass passport for configuratio
 
 // set up our express application
-app.use(express.static(__dirname + "/"))
-app.use("/public", express.static(path.join(__dirname, "/public")))
+app.use(express.static('public'))
 app.use(morgan("dev")) // log every request to the console
 app.use(cookieParser()) // read cookies (needed for auth)
 app.use(bodyParser.json()) // get information from html forms
