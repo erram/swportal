@@ -12,6 +12,9 @@
 
     <div class="jumbotron text-center">
         <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+         <% if (message.length > 0) { %>
+        <div class="alert alert-succes"><%= message %></div>
+        <% } %>
 
         <p>Login or Register with:</p>
 

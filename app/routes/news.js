@@ -37,16 +37,20 @@ app.post("/news/save", isLoggedIn, function (req, res) {
   var dateTime = require('node-datetime')
   var dt = dateTime.create()
   var formatted = dt.format('Y-m-d H:M:S')
+
   var news = new News({
-    ID: 5,
-    Cím: "teszt cím",
+    Cím: req.body.editor_title,
     Dátum: formatted,
-    Tartalom: req.body.content,
+    Tartalom: req.body.editor_content,
     Szerző: req.user._id,
     Publikálva: false
   })
 
   news.save(function (err) {
-    if (err) res.send(err)
+    if (err) {
+      res.send(err)
+    } else {
+      res.redirect("/")
+    }
   })
 })

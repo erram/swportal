@@ -73,16 +73,18 @@
         <div class="row">
             <div class="sample">
                 <h2>Sample 1: Save to disk</h2>
-                <form>
+                <form action="/news/save" method="POST">
+                    <input id="title" name="editor_title"></input>
                     <textarea id="edit" name="editor_content"></textarea>
+                    <button>Submit</button>
                 </form>
                 <button id="saveButton">Save</button>
                 
             </div>
             <script>
                 $(function () {
+                    var titletext = "inittext";
                     $('#edit').froalaEditor({
-
                         imageUploadURL: '/upload_image',
                         imageUploadParams: {
                             id: 'my_editor'
@@ -107,7 +109,7 @@
                         saveMethod: 'POST',
 
                         // Additional save params.
-                        saveParams: { id: 'my_editor' }
+                        saveParams: { title: titletext }
                     })
                         // Catch image removal from the editor.
                         .on('froalaEditor.image.removed', function (e, editor, $img) {
@@ -153,7 +155,11 @@
                                 })
                         })
                         .on('froalaEditor.save.before', function (e, editor) {
-                            // Before save request is made.
+                            titletext = document.getElementById('title').value
+                            console.log(e)
+                            saveParams: {
+                                lofasz: titletext
+                            }
                         })
                         .on('froalaEditor.save.after', function (e, editor, response) {
                             // After successfully save request.
@@ -162,9 +168,10 @@
                             // Do something here.
                         })
                 });
+                /*
                 $('#saveButton').click(function () {
                     $('#edit').froalaEditor('save.save');
-                })
+                })*/
             </script>
         </div>
 
