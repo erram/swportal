@@ -20,7 +20,6 @@
     "passport-google-oauth": "~1.0.0",
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.4",
-    "random-int": "^1.0.0",
     "truncate": "^2.0.0",
     "uuid": "^3.1.0"
   }
