@@ -4,7 +4,7 @@ var isAdmin = require("../utils/isadmin")
 var News = require('../models/newsitem')
 
 //Hír szerkeztő
-app.get("/news", isAdmin, function (req, res) {
+app.get("/news", isLoggedIn, function (req, res) {
   res.render("news.ejs")
 })
 
