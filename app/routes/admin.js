@@ -1,9 +1,10 @@
 var app = require("../../app")
 var isLoggedIn = require("../utils/auth")
+var isAdmin = require("../utils/isadmin")
 var News = require("../models/newsitem")
 var Card = require("../models/card")
 
-app.get("/admin/news", isLoggedIn, function(req, res) {
+app.get("/admin/news", isLoggedIn, isAdmin, function(req, res) {
   var moment = require("moment")
   News.find({}, function(err, news) {
     if (err) {
@@ -27,6 +28,7 @@ app.post("/admin/news/updatestatus", function (req, res) {
         if (err)
           console.log(newsitem._id + ' failed!')
         else
+          return res.status(200).send("OK")
           console.log(newsitem._id + ' updated!')
       })
     } else {

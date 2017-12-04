@@ -15,6 +15,7 @@ app.post("/news/update/:id", function (req, res) {
         if (err)
           console.log(newsitem._id + ' failed!')
         else
+          return res.status(200).send("OK")
           console.log(newsitem._id + ' updated!')
       })
     } else {

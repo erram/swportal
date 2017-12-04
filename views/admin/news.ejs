@@ -13,6 +13,7 @@
         #publish {
             display: none;
         }
+        .modal-box {display:none}
     </style>
 </head>
 <body>
@@ -34,7 +35,7 @@
     </tr>
   </thead>
   <tbody>
-    <div class="modal-box"></div>
+    <div class="modal-box alert alert-success"></div>
     <% for(var i=0; i < news.length; i++) { %>
     <tr>
         <td><%= news[i].ID %></td>
@@ -91,12 +92,9 @@
                         url: 'news/updatestatus',
                         data: {"newsID": news_id,"status":status},
                         type: 'post',
-                        error: function (data) {
-                            if (typeof (fail) === 'function') console.log(data);
-                        },
-                        success: function()
+                        success: function(data)
                         {
-                            $('.modal-box').text(fasz).fadeIn(700, function() 
+                            $('.modal-box').text("Hír státusa módosítva " +data).fadeIn(700, function() 
                             {
                                 setTimeout(function() 
                                 {
