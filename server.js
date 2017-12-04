@@ -6,6 +6,7 @@ var flash = require("connect-flash")
 var path = require("path")
 var express = require("express")
 
+
 var morgan = require("morgan")
 var cookieParser = require("cookie-parser")
 var bodyParser = require("body-parser")
@@ -13,13 +14,16 @@ var session = require("express-session")
 
 var configDB = require("./config/database.js")
 
+var News = require("./app/models/newsitem")
+var trunc = require("truncate")
+
 // configuration ===============================================================
 mongoose.connect(configDB.url)
 
 require("./config/passport")(passport) // pass passport for configuratio
 
 // set up our express application
-app.use(express.static('public'))
+app.use(express.static("public"))
 app.use(morgan("dev")) // log every request to the console
 app.use(cookieParser()) // read cookies (needed for auth)
 app.use(bodyParser.json()) // get information from html forms
@@ -28,7 +32,18 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set("view engine", "ejs") // set up ejs for templating
 
 app.get("/", function(req, res) {
-  res.render("index.ejs")
+  News.find({
+    Publikálva: "true"
+  })
+    .limit(6)
+    .sort({ Dátum: -1 }).exec(function(err,newsitems){
+      if(newsitems){
+        res.render("index.ejs", {newsitems:newsitems,trunc:trunc})
+      } else {
+        console.log(err)
+      }
+    })
+  
 })
 
 // required for passport

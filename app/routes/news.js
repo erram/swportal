@@ -1,9 +1,10 @@
 var app = require("../../app")
 var isLoggedIn = require("../utils/auth")
+var isAdmin = require("../utils/isadmin")
 var News = require('../models/newsitem')
 
 //Hír szerkeztő
-app.get("/news", isLoggedIn, function (req, res) {
+app.get("/news", isAdmin, function (req, res) {
   res.render("news.ejs")
 })
 
@@ -25,11 +26,10 @@ app.post("/news/update/:id", function (req, res) {
 
 app.get("/news/item/:id", function (req, res) {
   News.findOne({ "ID": req.params.id }, function (err, newsitem) {
-    if (newsitem) {
-      res.render("singlenews.ejs", { newsitem: newsitem })
-    } else {
-      console.log(err)
+    if(err || !newsitem) {
+      return res.status(500).send(err)
     }
+      res.render("singlenews.ejs", { newsitem: newsitem })
   })
 })
 
@@ -42,7 +42,8 @@ app.post("/news/save", isLoggedIn, function (req, res) {
     Cím: req.body.editor_title,
     Dátum: formatted,
     Tartalom: req.body.editor_content,
-    Szerző: req.user._id,
+    Szerző: req.user.local.email,
+    SzerzőID:req.user._id,
     Publikálva: false
   })
 

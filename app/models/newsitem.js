@@ -1,15 +1,16 @@
 // load the things we need
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
-var randomInt = require('random-int')
+var randomInt = require('uuid')
 
 // define the schema for our user model
 var newsitemdSchema = mongoose.Schema({
-    ID: { type: Number, default: randomInt(0, 1000000) },
+    ID: { type: String, default: randomInt.v4 },
     Cím: String,
     Dátum: Date,
     Tartalom: String,
-    Szerző: Schema.Types.ObjectId,
+    Szerző: String,
+    SzerzőID: Schema.Types.ObjectId,
     Publikálva: Boolean,
     Kategória: String
 });

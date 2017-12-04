@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style/app.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style>
-        
+
     </style>
 </head>
 <body>
@@ -19,6 +19,8 @@
         </div>
 
         <div class="article-container">
+
+            <% for(var i=0; i < newsitems.length; i++) { %>
             <div class="article">
                 <div class="image-content">
                     <a href=""><img src="http://mk.deltavision.hu/wp-content/uploads/2016/05/amt_nar-270x270.jpg"></a>
@@ -30,61 +32,18 @@
                             <span class="mo-ye">Nov 2017</span>
                         </div>
                         <div class="title">
-                            <h2><a href="">Lorem ipsum article title</a></h2>
-                            <span class="publisher"><a href="">valaki neve</a></span>
-                            <span class="category"><a href="">versenybeszámoló</a></span>
-                            <span class="comments"><a href="">123</a></span>
+                            <h2><a href="/news/item/<%= newsitems[i].ID %>"><%= newsitems[i].Cím %></a></h2>
+                            <span class="publisher"><a href=""><%= newsitems[i].Szerző %></a></span>
+                            <span class="category"><a href=""><%= newsitems[i].Kategória %></a></span>
+                            <!-- <span class="comments"><a href="">123</a></span> -->
                         </div>
                     </div>
                     <div class="article-lead">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        <%- trunc(newsitems[i].Tartalom,150) %>
                     </div>
                 </div>
             </div>
-            <div class="article">
-                <div class="image-content">
-                    <a href=""><img src="http://mk.deltavision.hu/wp-content/uploads/2017/06/senko_ryuu-270x270.jpg"></a>
-                </div>
-                <div class="text-content">
-                    <div class="title-content">
-                        <div class="date">
-                            <span class="day">30</span>
-                            <span class="mo-ye">Nov 2017</span>
-                        </div>
-                        <div class="title">
-                            <h2><a href="">Lorem ipsum article title</a></h2>
-                            <span class="publisher"><a href="">valaki neve</a></span>
-                            <span class="category"><a href="">versenybeszámoló</a></span>
-                            <span class="comments"><a href="">123</a></span>
-                        </div>
-                    </div>
-                    <div class="article-lead">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </div>
-                </div>
-            </div>
-            <div class="article wide">
-                <div class="image-content">
-                    <a href=""><img src="http://mk.deltavision.hu/wp-content/uploads/2017/06/senko_ryuu-270x270.jpg"></a>
-                </div>
-                <div class="text-content">
-                    <div class="title-content">
-                        <div class="date">
-                            <span class="day">30</span>
-                            <span class="mo-ye">Nov 2017</span>
-                        </div>
-                        <div class="title">
-                            <h2><a href="">Lorem ipsum article title</a></h2>
-                            <span class="publisher"><a href="">valaki neve</a></span>
-                            <span class="category"><a href="">versenybeszámoló</a></span>
-                            <span class="comments"><a href="">123</a></span>
-                        </div>
-                    </div>
-                    <div class="article-lead">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </div>
-                </div>
-            </div>
+            <% } %> 
         </div>
     </div>
 
