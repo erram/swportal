@@ -19,14 +19,6 @@ var userSchema = mongoose.Schema({
         role         : {type: String, default: "User"},
         username     : String
     },
-    twitter          : {
-        id           : String,
-        token        : String,
-        displayName  : String,
-        username     : String,
-        role         : {type: String, default: "User"},
-        username     : String
-    },
     google           : {
         id           : String,
         token        : String,

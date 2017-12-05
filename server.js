@@ -16,6 +16,7 @@ var configDB = require("./config/database.js")
 
 var News = require("./app/models/newsitem")
 var trunc = require("truncate")
+var moment = require("moment")
 
 // configuration ===============================================================
 mongoose.connect(configDB.url)
@@ -38,7 +39,7 @@ app.get("/", function(req, res) {
     .limit(6)
     .sort({ Dátum: -1 }).exec(function(err,newsitems){
       if(newsitems){
-        res.render("index.ejs", {newsitems:newsitems,trunc:trunc})
+        res.render("index.ejs", {newsitems:newsitems,trunc:trunc,moment:moment})
       } else {
         console.log(err)
       }
