@@ -28,8 +28,8 @@
                 <div class="text-content">
                     <div class="title-content">
                         <div class="date">
-                            <span class="day"><%= moment(newsitems[i].Dátum).day() %></span>
-                            <span class="mo-ye"><%= moment(newsitems[i].Dátum).subtract(1, "month").startOf("month").format('MMM') %> <%= moment(newsitems[i].Dátum).year() %></span>
+                            <span class="day"><%= moment(newsitems[i].Dátum, "MM-DD-YYYY").date() %></span>
+                           <span class="mo-ye"><%= moment(newsitems[i].Dátum).subtract(0, "month").startOf("month").format('MMM') %> <%= moment(newsitems[i].Dátum).year() %></span>
                         </div>
                         <div class="title">
                             <h2><a href="/news/item/<%= newsitems[i].ID %>"><%= newsitems[i].Cím %></a></h2>

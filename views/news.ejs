@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <!-- Include Font Awesome. -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="style/app.css">
     <script src="jquery/dist/jquery.min.js"></script>
 
     <!-- Include Froala Editor styles -->
@@ -53,47 +54,40 @@
     <script src="froala-wysiwyg-editor/js/plugins/video.min.js"></script>
     <!-- End Froala -->
 
-    <style>
-        body {
-            padding-top: 80px;
-            word-wrap: break-word;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="container">
+    <% include header %>
+    <div id="main-content" class="container">
 
-        <div class="page-header text-center">
-            <h1>
-                <span class="fa fa-anchor"></span> Hír szerkeztő</h1>
-            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        </div>
+        <div class="article-container">
 
         <div class="row">
             <div class="sample">
-                <h2>Sample 1: Save to disk</h2>
                 <form action="/news/save" method="POST">
-                    <input id="title" name="editor_title"></input>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Hír címe</label>
+                        <input class="form-control" id="title" name="editor_title"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Kategória</label>
+                        <select name="editor_category" class="form-control" id="exampleFormControlSelect1">
+                        <option value="Valamilyen kategória">Valamilyen kategória</option>
+                        </select>
+                    </div>
+                    
                     <textarea id="edit" name="editor_content"></textarea>
-                    <button>Submit</button>
+                    <br/>
+                    <button class="btn btn-success">Mentés</button>
                 </form>
-                <button id="saveButton">Save</button>
                 
             </div>
+            <% include footer %>
             <script>
                 $(function () {
                     var titletext = "inittext";
                     $('#edit').froalaEditor({
-                        imageUploadURL: '/upload_image',
-                        imageUploadParams: {
-                            id: 'my_editor'
-                        },
-
-                        fileUploadURL: '/upload_file',
-                        fileUploadParams: {
-                            id: 'my_editor'
-                        },
+                        imageUploadURL: '/news/uploadimage',
 
                         imageManagerLoadURL: '/load_images',
                         imageManagerDeleteURL: "/delete_image",
@@ -155,11 +149,7 @@
                                 })
                         })
                         .on('froalaEditor.save.before', function (e, editor) {
-                            titletext = document.getElementById('title').value
-                            console.log(e)
-                            saveParams: {
-                                lofasz: titletext
-                            }
+
                         })
                         .on('froalaEditor.save.after', function (e, editor, response) {
                             // After successfully save request.
@@ -173,6 +163,7 @@
                     $('#edit').froalaEditor('save.save');
                 })*/
             </script>
+            <script src="js/app-min.js"></script>
         </div>
 
 

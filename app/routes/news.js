@@ -2,6 +2,8 @@ var app = require("../../app")
 var isLoggedIn = require("../utils/auth")
 var isAdmin = require("../utils/isadmin")
 var News = require('../models/newsitem')
+var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js')
+
 
 //Hír szerkeztő
 app.get("/news", isLoggedIn, function (req, res) {
@@ -43,9 +45,10 @@ app.post("/news/save", isLoggedIn, function (req, res) {
     Cím: req.body.editor_title,
     Dátum: formatted,
     Tartalom: req.body.editor_content,
-    Szerző: req.user.local.email,
+    Szerző: req.user.local.username,
     SzerzőID:req.user._id,
-    Publikálva: false
+    Publikálva: false,
+    Kategória: req.body.editor_category
   })
 
   news.save(function (err) {
@@ -55,4 +58,17 @@ app.post("/news/save", isLoggedIn, function (req, res) {
       res.redirect("/")
     }
   })
+})
+
+app.post("/news/uploadimage", function(req,res){
+  // Store image.
+  FroalaEditor.Image.upload(req, 'public/uploaded_images/', function(err, data) {
+    console.log(data)
+    data.link = data.link.replace('public/','')
+    // Return data.
+    if (err) {
+      return res.send(JSON.stringify(err));
+    }
+    res.send(data);
+  });
 })
