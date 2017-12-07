@@ -5,33 +5,23 @@ var News = require("../models/newsitem")
 var Card = require("../models/card")
 var User = require("../models/user")
 
-app.get("/admin/news", isLoggedIn, isAdmin, function(req, res) {
+app.get("/admin", isLoggedIn, isAdmin, function(req, res) {
   var moment = require("moment")
-  News.find({}, function(err, news) {
-    if (err) {
-      res.send(err)
-    } else {
-      res.render("admin/news.ejs", {
-        news: news,
-        usr: req.user.local.email,
-        moment: moment
-      })
-    }
+  User.find({}, function(err, users){
+    News.find({}, function(err, news) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.render("admin/index.ejs", {
+          news: news,
+          usr: req.user.local.email,
+          moment: moment,
+          users: users
+        })
+      }
+    })
   })
 })
-
-app.get("/admin/users", isLoggedIn, isAdmin, function(req, res) {
-  User.find({}, function(err, users) {
-    if (err) {
-      res.send(err)
-    } else {
-      res.render("admin/users.ejs", {
-        users: users
-      })
-    }
-  })
-})
-
 
 app.post("/admin/news/updatestatus", function (req, res) {
   News.findOne({ "ID": req.body.newsID }, function (err, newsitem) {

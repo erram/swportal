@@ -3,15 +3,13 @@
 <head>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body         { padding-top:80px; }
-    </style>
+    <link rel="stylesheet" href="style/app.css">
 </head>
 <body>
-<div class="container">
-<div class="col-sm-6 col-sm-offset-3">
+<% include header %>
+    <div id="main-content" class="container">
 
-    <h1><span class="fa fa-sign-in"></span> Login</h1>
+        <div class="article-container">
 
     <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
@@ -33,10 +31,12 @@
 
     <hr>
 
-    <p>Need an account? <a href="/signup">Signup</a></p>
-    <p>Or go <a href="/">home</a>.</p>
+    <p>Nincs fiókod? <a href="/signup">Regisztrálj</a></p>
+    <p>Vagy <a href="/">főoldal</a>.</p>
+      </div>
+    </div>
 
-</div>
-</div>
+    <% include footer %>
+<script src="js/app-min.js"></script>
 </body>
 </html>
