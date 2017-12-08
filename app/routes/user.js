@@ -1,12 +1,23 @@
 var app = require('../../app');
 var passport = require('passport');
 var isLoggedIn = require('../utils/auth')
+var News = require('../models/newsitem')
+var ObjectId = require('mongodb').ObjectID
 
 app.get("/profile", isLoggedIn, function(req, res) {
-  console.log(req.db)
-  res.render("profile.ejs", {
-    user: req.user
+  var moment = require("moment")
+  News.find({ "SzerzőID": new ObjectId(req.user._id) }, function (err, newsitem) {
+    if(err) {
+      res.status(500).send(err)
+    } else {
+      res.render("profile.ejs", {
+        user: req.user,
+        newsitem: newsitem,
+        moment: moment
+      })
+    }
   })
+ 
 })
 
 app.get("/logout", function(req, res) {
