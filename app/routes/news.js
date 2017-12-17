@@ -14,15 +14,17 @@ app.post("/news/update/:id", function (req, res) {
   News.findOne({ "ID": req.params.id }, function (err, newsitem) {
     if (newsitem) {
       newsitem.save(function (err) {
-        if (err)
+        if (err) {
           console.log(newsitem._id + ' failed!')
-        else
-          return res.status(200).send("OK")
+          return res.status(500).send(err)
+        } else {
           console.log(newsitem._id + ' updated!')
+          return res.status(200).send("OK")
+        }
       })
     } else {
       console.log(err)
-      res.send(err)
+      res.status(500).send(err)
     }
   })
 })

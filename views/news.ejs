@@ -62,112 +62,111 @@
 
         <div class="article-container">
 
-        <div class="row">
-            <div class="sample">
-                <form action="/news/save" method="POST">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Hír címe</label>
-                        <input class="form-control" id="title" name="editor_title"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Kategória</label>
-                        <select name="editor_category" class="form-control" id="exampleFormControlSelect1">
-                        <option value="Valamilyen kategória">Valamilyen kategória</option>
-                        </select>
-                    </div>
-                    
-                    <textarea id="edit" name="editor_content"></textarea>
-                    <br/>
-                    <button class="btn btn-success">Mentés</button>
-                </form>
+            <div class="row">
+                <div class="sample">
+                    <form action="/news/save" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Hír címe</label>
+                            <input class="form-control" id="title" name="editor_title"></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Kategória</label>
+                            <select name="editor_category" class="form-control" id="exampleFormControlSelect1">
+                            <option value="Valamilyen kategória">Valamilyen kategória</option>
+                            </select>
+                        </div>
+                        
+                        <textarea id="edit" name="editor_content"></textarea>
+                        <br/>
+                        <button class="btn btn-success">Mentés</button>
+                    </form>
+                </div>
                 
+                <script>
+                    $(function () {
+                        var titletext = "inittext";
+                        $('#edit').froalaEditor({
+                            imageUploadURL: '/news/uploadimage',
+
+                            imageManagerLoadURL: '/load_images',
+                            imageManagerDeleteURL: "/delete_image",
+                            imageManagerDeleteMethod: "POST",
+
+                            // Set the save param.
+                            saveParam: 'content',
+
+                            // Set the save URL.
+                            saveURL: 'news/save',
+
+                            // HTTP request type.
+                            saveMethod: 'POST',
+
+                            // Additional save params.
+                            saveParams: { title: titletext }
+                        })
+                            // Catch image removal from the editor.
+                            .on('froalaEditor.image.removed', function (e, editor, $img) {
+                                $.ajax({
+                                    // Request method.
+                                    method: "POST",
+
+                                    // Request URL.
+                                    url: "/delete_image",
+
+                                    // Request params.
+                                    data: {
+                                        src: $img.attr('src')
+                                    }
+                                })
+                                    .done(function (data) {
+                                        console.log('image was deleted');
+                                    })
+                                    .fail(function (err) {
+                                        console.log('image delete problem: ' + JSON.stringify(err));
+                                    })
+                            })
+                            // Catch file removal from the editor.
+                            .on('froalaEditor.file.unlink', function (e, editor, link) {
+
+                                $.ajax({
+                                    // Request method.
+                                    method: "POST",
+
+                                    // Request URL.
+                                    url: "/delete_file",
+
+                                    // Request params.
+                                    data: {
+                                        src: link.getAttribute('href')
+                                    }
+                                })
+                                    .done(function (data) {
+                                        console.log('file was deleted');
+                                    })
+                                    .fail(function (err) {
+                                        console.log('file delete problem: ' + JSON.stringify(err));
+                                    })
+                            })
+                            .on('froalaEditor.save.before', function (e, editor) {
+
+                            })
+                            .on('froalaEditor.save.after', function (e, editor, response) {
+                                // After successfully save request.
+                            })
+                            .on('froalaEditor.save.error', function (e, editor, error) {
+                                // Do something here.
+                            })
+                    });
+                    /*
+                    $('#saveButton').click(function () {
+                        $('#edit').froalaEditor('save.save');
+                    })*/
+                </script>
+                <script src="js/app-min.js"></script>
             </div>
-            <% include footer %>
-            <script>
-                $(function () {
-                    var titletext = "inittext";
-                    $('#edit').froalaEditor({
-                        imageUploadURL: '/news/uploadimage',
-
-                        imageManagerLoadURL: '/load_images',
-                        imageManagerDeleteURL: "/delete_image",
-                        imageManagerDeleteMethod: "POST",
-
-                        // Set the save param.
-                        saveParam: 'content',
-
-                        // Set the save URL.
-                        saveURL: 'news/save',
-
-                        // HTTP request type.
-                        saveMethod: 'POST',
-
-                        // Additional save params.
-                        saveParams: { title: titletext }
-                    })
-                        // Catch image removal from the editor.
-                        .on('froalaEditor.image.removed', function (e, editor, $img) {
-                            $.ajax({
-                                // Request method.
-                                method: "POST",
-
-                                // Request URL.
-                                url: "/delete_image",
-
-                                // Request params.
-                                data: {
-                                    src: $img.attr('src')
-                                }
-                            })
-                                .done(function (data) {
-                                    console.log('image was deleted');
-                                })
-                                .fail(function (err) {
-                                    console.log('image delete problem: ' + JSON.stringify(err));
-                                })
-                        })
-                        // Catch file removal from the editor.
-                        .on('froalaEditor.file.unlink', function (e, editor, link) {
-
-                            $.ajax({
-                                // Request method.
-                                method: "POST",
-
-                                // Request URL.
-                                url: "/delete_file",
-
-                                // Request params.
-                                data: {
-                                    src: link.getAttribute('href')
-                                }
-                            })
-                                .done(function (data) {
-                                    console.log('file was deleted');
-                                })
-                                .fail(function (err) {
-                                    console.log('file delete problem: ' + JSON.stringify(err));
-                                })
-                        })
-                        .on('froalaEditor.save.before', function (e, editor) {
-
-                        })
-                        .on('froalaEditor.save.after', function (e, editor, response) {
-                            // After successfully save request.
-                        })
-                        .on('froalaEditor.save.error', function (e, editor, error) {
-                            // Do something here.
-                        })
-                });
-                /*
-                $('#saveButton').click(function () {
-                    $('#edit').froalaEditor('save.save');
-                })*/
-            </script>
-            <script src="js/app-min.js"></script>
         </div>
-
-
     </div>
+    <% include footer %>
 </body>
 
 </html>

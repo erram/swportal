@@ -14,33 +14,33 @@
 <% include header %>
     <div id="main-content" class="container">
         <div class="article-container">
-            <dic class="col-sm-12">
+            <div class="col-sm-12">
                 <div class="well">
                     <h3><span class="fa fa-address-book"></span> Postolt hírek</h3>
 
                     <% if (newsitem) { %>
-                        <table class="table" id="example">
-                    <thead class="thead-inverse">
-                        <tr>
-                        <th>Cím</th>
-                        <th>Dátum</th>
-                        <th style="text-align:center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for(var i=0; i < newsitem.length; i++) { %>
-                        <tr>
-                            <td><a href="/news/item/<%= newsitem[i].ID; %>"><span><%= newsitem[i].Cím %></span></a></td>
-                            <td><%=  moment(newsitem[i].Dátum).format('MMM-DD-YYYY') %></td>  
-                            <td align="center">
-                            <a href="/news/edit/<%= newsitem[i].ID; %>" class="btn btn-primary a-btn-slide-text">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                <span><strong>Módosít</strong></span>            
-                            </a>
-                            </td>   
-                        </tr>
-                        <% } %>    
-                    </tbody>
+                    <table class="table" id="example">
+                        <thead class="thead-inverse">
+                            <tr>
+                            <th>Cím</th>
+                            <th>Dátum</th>
+                            <th style="text-align:center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < newsitem.length; i++) { %>
+                            <tr>
+                                <td><a href="/news/item/<%= newsitem[i].ID; %>"><span><%= newsitem[i].Cím %></span></a></td>
+                                <td><%=  moment(newsitem[i].Dátum).format('MMM-DD-YYYY') %></td>  
+                                <td align="center">
+                                <a href="/news/edit/<%= newsitem[i].ID; %>" class="btn btn-primary a-btn-slide-text">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Módosít</strong></span>            
+                                </a>
+                                </td>   
+                            </tr>
+                            <% } %>    
+                        </tbody>
                     </table>
                     <% } %>
                 </div>
@@ -62,8 +62,8 @@
                     <% } %>
                 </div>
             </div>
-            <!-- FACEBOOK INFORMATION 
-            <div class="col-sm-12">
+
+            <!--<div class="col-sm-12">
                 <div class="well">
                     <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
                     <% if (user.facebook.token) { %>
@@ -83,7 +83,7 @@
             </div>-->
       </div>
     </div>
-    <% include footer %>
+<% include footer %>
 <script src="js/app-min.js"></script>
 </body>
 </html>
