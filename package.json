@@ -24,7 +24,7 @@
     "truncate": "^2.0.0",
     "uuid": "^3.1.0",
     "wysiwyg-editor-node-sdk": "^2.3.4-rc.1",
-    "bower": "0.6.x"
+    "bower": "^1.8"
   },
   "scripts": {
       "postinstall": "./node_modules/bower/bin/bower install"
