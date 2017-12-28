@@ -10,16 +10,25 @@ app.get("/news", isLoggedIn, function (req, res) {
   res.render("news.ejs")
 })
 
-app.post("/news/update/:id", function (req, res) {
+app.post("/news/update/:id", isLoggedIn, function (req, res) {
   News.findOne({ "ID": req.params.id }, function (err, newsitem) {
     if (newsitem) {
+      var dateTime = require('node-datetime')
+      var dt = dateTime.create()
+      var formatted = dt.format('Y-m-d H:M:S')
+
+      newsitem.Cím = req.body.editor_title
+      newsitem.Dátum = formatted
+      newsitem.Tartalom = req.body.editor_content
+      newsitem.Kategória = req.body.editor_category
+
       newsitem.save(function (err) {
         if (err) {
           console.log(newsitem._id + ' failed!')
           return res.status(500).send(err)
         } else {
           console.log(newsitem._id + ' updated!')
-          return res.status(200).send("OK")
+          res.redirect("/")
         }
       })
     } else {
@@ -37,6 +46,16 @@ app.get("/news/item/:id", function (req, res) {
       res.render("singlenews.ejs", { newsitem: newsitem })
   })
 })
+
+app.get("/news/edit/:id", function (req, res) {
+  News.findOne({ "ID": req.params.id }, function (err, newsitem) {
+    if(err || !newsitem) {
+      return res.status(500).send(err)
+    }
+      res.render("modifynews.ejs", { newsitem: newsitem })
+  })
+})
+
 
 app.post("/news/save", isLoggedIn, function (req, res) {
   var dateTime = require('node-datetime')
