@@ -3,23 +3,18 @@
 <head>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body         { padding-top:80px; word-wrap:break-word; }
-    </style>
+    <link rel="stylesheet" href="style/app.css">
 </head>
 <body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Kártyalista</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+<% include header %>
+    <div id="main-content" class="container">
+        <div class="article-container">
+            <% for(var i=0; i < itms.length; i++) { %>
+                <span><%= itms[i].Név %></span>
+            <% } %>
+        </div>
     </div>
-
-    <div class="row">
-        <% for(var i=0; i < itms.length; i++) { %><span><%= itms[i].Név %></span>&nbsp;&nbsp;&nbsp;&nbsp;<% } %>    
-    </div>
-
-
-</div>
+<% include footer %>
+<script src="js/app-min.js"></script>
 </body>
 </html>
