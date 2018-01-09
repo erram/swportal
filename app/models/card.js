@@ -16,7 +16,8 @@ var cardSchema = mongoose.Schema({
     Szövegmező: String,
     Illusztrátor: String,
     Idézet: String,
-    ERRÁTA: String
+    ERRÁTA: String,
+    Kiadás: String
 });
 
 
