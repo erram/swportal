@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style/app.css">
+    <script src="jquery/dist/jquery.min.js"></script>
+</head>
+<style>
+    .btn {
+        font-size: 12px;
+    }
+    
+    #search-input {
+        width: 470px;
+        max-width: 100%;
+    }
+    
+    .form-inline {
+        margin-bottom: 20px;
+    }
+    
+    .sm-inputs input {
+        max-width: 75px;
+    }
+</style>
+
+<body>
+    <% include header %>
+        <div id="main-content" class="container">
+            <h2 class="text-center">Kártya kereső</h2>
+            <form action="">
+                <div class="form-inline text-center">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="search-input" aria-describedby="Kereső mező">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Keresés</button>
+                    </div>
+
+                </div>
+
+                <div class="form-inline text-center">
+                    <div class="form-group">
+                        <input class="form-check-input" type="checkbox" value="" id="name">
+                        <label class="form-check-label" for="name">
+                            Név alapján
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-check-input" type="checkbox" value="" id="text">
+                        <label class="form-check-label" for="text">
+                            Szöveg alapján
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-check-input" type="checkbox" value="" id="illustrator">
+                        <label class="form-check-label" for="illustrator">
+                            Illusztrátor alapján
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-check-input" type="checkbox" value="" id="quote">
+                        <label class="form-check-label" for="quote">
+                            Idézet alapján
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Szín</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Kék - Erő
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Piros - Hadsereg
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Sárga - Szerencsevadászok
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Szürke - Egyéb
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Oldal </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                    <input type="checkbox"> Gonosz
+                                </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                    <input type="checkbox"> Hős
+                                </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                    <input type="checkbox"> Semleges
+                                </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Típus </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Karakter
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Fejlesztés
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Támogatás
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Esemény
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Csatatér
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Terv
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Gyakoriság </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                        <input type="checkbox"> Ritkaság
+                                    </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                        <input type="checkbox"> Gyakori
+                                    </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                        <input type="checkbox"> Nem gyakori
+                                    </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                        <input type="checkbox"> Ritka
+                                    </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                        <input type="checkbox"> Legendás
+                                    </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Kezdőcsomag
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="">Altípus</label>
+                            <select class="form-control">
+                                <option>Képesség</option>
+                                <option>Felszerelés</option>
+                                <option>Fegyver</option>
+                                <option>Jármű</option>
+                                <option>Droid</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Kiadás</label>
+                            <select class="form-control">
+                                    <option>Ébredések</option>
+                                    <option>Lázadás</option>
+                                    <option>Birodalom fegyverben</option>
+                                    <option>Kétjátékos szett</option>
+                                    <option>Örökség</option>
+                                    <option>Riválisok</option>
+                                </select>
+                        </div>
+                        <div class="form-group sm-inputs">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">Erőforrásköltség</label>
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Min" id="">
+                                        </div>
+                                        -
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Max" id="">
+                                        </div>
+                                    </div>
+                                    <label for="">Pont</label>
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Min" id="">
+                                        </div>
+                                        -
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Max" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">Életerő</label>
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Min" id="">
+                                        </div>
+                                        -
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Max" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+        </div>
+
+        </form>
+        </div>
+        <% include footer %>
+            <script src="js/app-min.js"></script>
+</body>
+
+</html>
