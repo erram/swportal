@@ -2,6 +2,7 @@ var app = require("../../app")
 var isLoggedIn = require("../utils/auth")
 var isAdmin = require("../utils/isadmin")
 var News = require('../models/newsitem')
+var Comment = require('../models/comment')
 var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js')
 
 
@@ -43,7 +44,7 @@ app.get("/news/item/:id", function (req, res) {
     if(err || !newsitem) {
       return res.status(500).send(err)
     }
-      res.render("singlenews.ejs", { newsitem: newsitem })
+      res.render("singlenews.ejs", { newsitem: newsitem, user: req.user })
   })
 })
 
@@ -77,6 +78,27 @@ app.post("/news/save", isLoggedIn, function (req, res) {
       res.send(err)
     } else {
       res.redirect("/")
+    }
+  })
+})
+
+app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
+  var dateTime = require('node-datetime')
+  var dt = dateTime.create()
+  var formatted = dt.format('Y-m-d H:M:S')
+
+  var comment = new Comment({
+    content: req.body.editor_content,
+	  puser: req.user._id,
+    newsitem: req.params.id,
+	  date: formatted
+  })
+
+  comment.save(function (err) {
+    if (err) {
+      res.send(err)
+    } else {
+      res.redirect("/news/item/"+(req.params.id).substr(1))
     }
   })
 })

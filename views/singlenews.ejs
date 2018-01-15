@@ -33,7 +33,16 @@
       </div>
     </div>
     <div class="article-comment-list">
-      <a class="forum-link" href="#">Szólj hozzá a fórumon</a>
+      
+      <% if(user) {%>
+      <form action="/news/commentsave/:<%= newsitem.ID %>" method="POST">
+        <textarea id="edit" name="editor_content"></textarea>
+        <button class="btn btn-success">Hozzászólok</button>
+      </form>
+      
+      <% } else {%>
+        <a class="forum-link" href="#">ha hozzászólnál, kérlek lépj be!</a>
+      <% } %>
       <div class="article-comment">
         <div class="comment-head">
           <a class="user-name" href="#">username</a>
