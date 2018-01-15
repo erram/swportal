@@ -7,7 +7,8 @@ var randomInt = require('uuid')
 var commentitemSchema = mongoose.Schema({
     id: { type: String, default: randomInt.v4 },
     content: String,
-	puser: Schema.Types.ObjectId,
+    puser: Schema.Types.ObjectId,
+    pusername: String,
     newsitem: String,
 	date: Date,
     moderated:{type:Boolean, default: false}

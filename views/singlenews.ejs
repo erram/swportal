@@ -43,17 +43,23 @@
       <% } else {%>
         <a class="forum-link" href="#">ha hozzászólnál, kérlek lépj be!</a>
       <% } %>
-      <div class="article-comment">
-        <div class="comment-head">
-          <a class="user-name" href="#">username</a>
-          <span class="date">2017.05.23. 18:32</span>
-        </div>
-        <div class="comment-body">
-          <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          </p>
-        </div>
-      </div>
+      
+      <% if(comments) {%>
+        <% for(var i=0; i < comments.length; i++) { %>
+          <div class="article-comment">
+            <div class="comment-head">
+              <a class="user-name" href="#"><%= comments[i].pusername %></a>
+              <span class="date"><%= moment(comments[i].date).format("YYYY-MM-DD HH:mm") %></span>
+            </div>
+            <div class="comment-body">
+              <p>
+                <%= comments[i].content %>
+              </p>
+            </div>
+          </div>
+        <% } %>
+      <% } %>
+
     </div>
     
   </div>

@@ -40,20 +40,30 @@ app.post("/news/update/:id", isLoggedIn, function (req, res) {
 })
 
 app.get("/news/item/:id", function (req, res) {
+  var moment = require("moment")
   News.findOne({ "ID": req.params.id }, function (err, newsitem) {
-    if(err || !newsitem) {
-      return res.status(500).send(err)
-    }
-      res.render("singlenews.ejs", { newsitem: newsitem, user: req.user })
+    Comment.find({ "newsitem": req.params.id }, function (err, comments) {
+      if (err || !newsitem) {
+        return res.status(500).send(err)
+      } else {
+        res.render("singlenews.ejs", { 
+          newsitem: newsitem, 
+          user: req.user, 
+          comments: comments, 
+          moment: moment })
+      }
+    })
   })
+
+
 })
 
 app.get("/news/edit/:id", function (req, res) {
   News.findOne({ "ID": req.params.id }, function (err, newsitem) {
-    if(err || !newsitem) {
+    if (err || !newsitem) {
       return res.status(500).send(err)
     }
-      res.render("modifynews.ejs", { newsitem: newsitem })
+    res.render("modifynews.ejs", { newsitem: newsitem })
   })
 })
 
@@ -68,7 +78,7 @@ app.post("/news/save", isLoggedIn, function (req, res) {
     Dátum: formatted,
     Tartalom: req.body.editor_content,
     Szerző: req.user.local.username,
-    SzerzőID:req.user._id,
+    SzerzőID: req.user._id,
     Publikálva: false,
     Kategória: req.body.editor_category
   })
@@ -89,25 +99,26 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
 
   var comment = new Comment({
     content: req.body.editor_content,
-	  puser: req.user._id,
-    newsitem: req.params.id,
-	  date: formatted
+    puser: req.user._id,
+    pusername: req.user.local.username,
+    newsitem: (req.params.id).substr(1),
+    date: formatted
   })
 
   comment.save(function (err) {
     if (err) {
       res.send(err)
     } else {
-      res.redirect("/news/item/"+(req.params.id).substr(1))
+      res.redirect("/news/item/" + (req.params.id).substr(1))
     }
   })
 })
 
-app.post("/news/uploadimage", function(req,res){
+app.post("/news/uploadimage", function (req, res) {
   // Store image.
-  FroalaEditor.Image.upload(req, 'public/uploaded_images/', function(err, data) {
+  FroalaEditor.Image.upload(req, 'public/uploaded_images/', function (err, data) {
     console.log(data)
-    data.link = data.link.replace('public/','')
+    data.link = data.link.replace('public/', '')
     // Return data.
     if (err) {
       return res.send(JSON.stringify(err));
