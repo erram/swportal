@@ -80,7 +80,8 @@ app.post("/news/save", isLoggedIn, function (req, res) {
     Szerző: req.user.local.username,
     SzerzőID: req.user._id,
     Publikálva: false,
-    Kategória: req.body.editor_category
+    Kategória: req.body.editor_category,
+    commentecounter: 0
   })
 
   news.save(function (err) {
@@ -109,6 +110,17 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
     if (err) {
       res.send(err)
     } else {
+      News.findOne({ "ID": (req.params.id).substr(1) }, function (err, newsitem) {
+        newsitem.commentecounter += 1
+        newsitem.save(function (err) {
+          if (err) {
+            console.log('news:'+req.params.id+' '+'failed to increment counter!')
+            return res.status(500).send(err)
+          } else {
+            console.log('news:'+req.params.id+' '+'incremented counter!')
+          }
+        })
+      })
       res.redirect("/news/item/" + (req.params.id).substr(1))
     }
   })
