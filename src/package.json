@@ -13,13 +13,10 @@
     "gulp-data": "^1.2.1",
     "gulp-minify": "0.0.15",
     "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.3.2",
+    "gulp-sass": "^3.1",
     "gulp-watch": "^4.3.9",
     "gulp-webserver": "^0.9.1",
     "pretty-data": "^0.40.0",
     "velocity": "^0.7.2"
-  },
-  "engines": {
-    "node": "0.10.x"
   }
 }

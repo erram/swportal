@@ -9,6 +9,7 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
         #publish {
@@ -24,10 +25,9 @@
 <body>
 <%- include('../header') %>
     <div id="main-content" class="container">
-        <div class="article-container">
-            <div class="jumbotron">
-                <h1><strong><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp Hír lista</strong></h1>
-                <hr class="my-4">
+        <div class="article-container admin">
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp Hír lista</strong></div>
                 <table class="table" id="example">
                 <thead class="thead-inverse">
                     <tr>
@@ -54,9 +54,8 @@
                 </table>
             </div>
              
-            <div class="jumbotron">
-                <h1><strong><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp User lista</strong></h1>
-                <hr class="my-4">
+            <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp User lista</strong></div>
                 <table class="table" id="example2">
                 <thead class="thead-inverse">
                     <tr>
@@ -85,27 +84,84 @@
                 </table>
             </div>
 
-            <div class="jumbotron">
-                <h1><strong><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp Event lista</strong></h1>
-                <hr class="my-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp Event lista</strong></div>
+                <table class="table" id="example3">
+                        <thead class="thead-inverse">
+                            <tr>
+                            <th>Esemény neve</th>
+                            <th>Kezdeti dátum</th>
+                            <th>Vég Dátum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                <% for(var i=0; i < events.length; i++) { %>  
+                    <tr>
+                            <td ><a href="<%= events[i].url%>"><%= events[i].title %></a></td>
+                            <td><%= events[i].start %></td>
+                            <td><%= events[i].end %></td>   
+                        </tr>
+                <% } %>
+            </tbody>
+        </table>
 
-                <div id="eventpopup">
-                    <form action="/events/add" method="POST">
-                        <label>Esemény neve:</label>
-                        <input type="text" name="event_name">
-                        <label>Kezdete:</label>
-                        <input type="text" id="datepickerstart" name="event_startdate">
-                        <label>Vége:</label>
-                        <input type="text" id="datepickerend" name="event_enddate">
-                        <label>Link az eseményre:</label>
-                        <input type="text" name="event_link">
-                        <label>Egész napos esemény:</label>
-                        <input type="radio" name="event_allday">
-                        <label>Megkülönböztető cimke:</label>
-                        <input type="text" name="event_class">
-                        <button class="btn btn-success">Létrehoz</button>
-                    </form>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Adj hozzá eseményt
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Esemény hozzáadás</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                                <div id="eventpopup">
+                                        <form action="/events/add" method="POST" class="form-group">
+                                            <div class="form-group col-md-12">
+                                                <label>Esemény neve:</label>
+                                                <input type="text" name="event_name" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Kezdete:</label>
+                                                <input type="text" id="datepickerstart" name="event_startdate" class="form-control">                                
+                                            </div>
+                                           
+                                            <div class="form-group col-md-6">
+                                                <label>Vége:</label>
+                                                <input type="text" id="datepickerend" name="event_enddate" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Link az eseményre:</label>
+                                                <input type="text" name="event_link" class="form-control">
+                                                <p class="minilabel">Példa a helyes formátumra: news/item/20148bc0-5750-4664-b6a6-ff1e93950ffc</p>
+                                            </div>
+                                            
+                                            <div class="form-group col-md-12">
+                                                <label>Megkülönböztető cimke:</label>
+                                                <input type="text" name="event_class" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                    <label>Egész napos esemény:</label>
+                                                    <input type="radio" name="event_allday" class="form-control">
+                                                </div>
+                                            <button class="btn btn-success">Létrehoz</button>
+                                        </form>
+                                    </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
+                        </div>
+                    </div>
+                    </div>
                 </div>
+
+                
 
             </div>
         </div>
@@ -121,6 +177,9 @@
                 $( "#datepickerstart" ).datepicker();
                 $( "#datepickerend" ).datepicker();
             } );
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')
+                })
              function statechange(){
                     var togglelista = $(".togglef");
                     togglelista.each(function(){

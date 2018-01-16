@@ -648,6 +648,18 @@ h5 {
     .article-comment-list .article-comment .comment-head .date {
       float: right; }
 
+.admin {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left; }
+  .admin .panel-heading {
+    margin-bottom: 10px; }
+  .admin #example_wrapper .row, .admin #example2_wrapper .row {
+    margin: 0px; }
+
 body {
   background: url(http://mk.deltavision.hu/wp-content/uploads/2015/10/background.png);
   background-position: 0 0;

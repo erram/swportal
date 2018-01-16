@@ -4,21 +4,25 @@ var isAdmin = require("../utils/isadmin")
 var News = require("../models/newsitem")
 var Card = require("../models/card")
 var User = require("../models/user")
+var Events = require("../models/events")
 
 app.get("/admin", isLoggedIn, isAdmin, function(req, res) {
   var moment = require("moment")
   User.find({}, function(err, users){
     News.find({}, function(err, news) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.render("admin/index.ejs", {
-          news: news,
-          usr: req.user.local.email,
-          moment: moment,
-          users: users
-        })
-      }
+      Events.find({}, function(err, events) {
+        if (err) {
+          res.send(err)
+        } else {
+          res.render("admin/index.ejs", {
+            news: news,
+            usr: req.user.local.email,
+            moment: moment,
+            users: users,
+            events: events
+          })
+        }
+      })
     })
   })
 })
