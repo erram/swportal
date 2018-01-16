@@ -60,6 +60,7 @@
 </head>
 </head>
 <body>
+<p id="data" style="display:none"><%- itms%></p>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 
 <script>
@@ -103,7 +104,27 @@
 	
 		/* initialize the calendar
 		-----------------------------------------------------------------*/
+		var json = []
+
+		var temp = JSON.parse($("#data").text())
 		
+		for(i=0; i < temp.length; i++) {
+			var allday 
+			if(typeof(temp[i].allDay) == "undefined"){allday = false} else {allday = temp[i].allDay}
+
+			var obj = {
+				title: temp[i].title,
+				start: new Date(y, m, d, 12, 0),
+				end: new Date(y, m, d, 14, 0),
+				allDay: allday,
+				className: temp[i].className
+			}
+
+			json.push(obj);
+		}
+
+		console.log(json)
+
 		var calendar =  $('#calendar').fullCalendar({
 			header: {
 				left: 'title',
@@ -144,7 +165,7 @@
 				}
 				calendar.fullCalendar('unselect');
 			},
-			droppable: true, // this allows things to be dropped onto the calendar !!!
+			droppable: false, // this allows things to be dropped onto the calendar !!!
 			drop: function(date, allDay) { // this function is called when something is dropped
 			
 				// retrieve the dropped element's stored Event Object
@@ -169,52 +190,7 @@
 				
 			},
 			
-			events: [
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					id: 999,
-					title: 'valami többször',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					id: 999,
-					title: 'valami többször',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					title: 'valami',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'valami tól ig',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Valami tól ig',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false,
-				},
-				{
-					title: 'több napos linkkel',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 30),
-					url: 'http://google.com/',
-					className: 'success'
-				}
-			],			
+			events: json,			
 		});
 		
 		
