@@ -111,11 +111,12 @@
 		for(i=0; i < temp.length; i++) {
 			var allday 
 			if(typeof(temp[i].allDay) == "undefined"){allday = false} else {allday = temp[i].allDay}
-
+			var startdate = new Date(temp[i].start)
+			var enddate = new Date(temp[i].end)
 			var obj = {
 				title: temp[i].title,
-				start: new Date(y, m, d, 12, 0),
-				end: new Date(y, m, d, 14, 0),
+				start: new Date(startdate.getFullYear(), startdate.getMonth(), startdate.getDate()-1, startdate.getHours(), startdate.getMinutes()),
+				end: new Date(enddate.getFullYear(), enddate.getMonth(), enddate.getDate()-1, enddate.getHours(), enddate.getMinutes()),
 				allDay: allday,
 				className: temp[i].className
 			}
