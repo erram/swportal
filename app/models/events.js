@@ -11,7 +11,8 @@ var eventitemSchema = mongoose.Schema({
     end: Date,
 	url: String,
     className: String,
-    allDay: Boolean
+    allDay: Boolean,
+    participants: Array
 
 });
 

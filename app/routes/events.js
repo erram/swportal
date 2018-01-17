@@ -31,3 +31,33 @@ app.post("/events/add", function(req, res) {
       }
     })
 })
+
+app.post("/events/participate/:name/:newsid", function(req, res) {
+  Event.findOne({"url":req.params.newsid}, function(err, itm) {
+    if (err) {
+      console.log(err)
+    } else {
+      if (itm) {
+
+        var temp = itm.participants
+        temp.push(req.params.name)
+        itm.participants = temp
+
+        itm.save(function (err) {
+          if (err) {
+            console.log(itm.title + ' failed!')
+            return res.status(500).send(err)
+          } else {
+            console.log(itm.title + ' updated!')
+            res.redirect("/news/item/"+req.params.newsid)
+          }
+        })  
+      } else {
+        console.log(err)
+        res.status(500).send(err)
+      }
+          
+    }
+  })
+  
+})

@@ -95,7 +95,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                <% for(var i=0; i < events.length; i++) { %>  
+                        <% for(var i=0; i < events.length; i++) { %>  
                     <tr>
                             <td ><a href="<%= events[i].url%>"><%= events[i].title %></a></td>
                             <td><%= events[i].start %></td>
@@ -139,7 +139,7 @@
                                             <div class="form-group col-md-12">
                                                 <label>Link az eseményre:</label>
                                                 <input type="text" name="event_link" class="form-control">
-                                                <p class="minilabel">Példa a helyes formátumra: news/item/20148bc0-5750-4664-b6a6-ff1e93950ffc</p>
+                                                <p class="minilabel">Példa a helyes formátumra: 20148bc0-5750-4664-b6a6-ff1e93950ffc (ami a hír link utolsó része)</p>
                                             </div>
                                             
                                             <div class="form-group col-md-12">

@@ -3,6 +3,7 @@ var isLoggedIn = require("../utils/auth")
 var isAdmin = require("../utils/isadmin")
 var News = require('../models/newsitem')
 var Comment = require('../models/comment')
+var Event = require('../models/events')
 var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js')
 
 
@@ -46,12 +47,31 @@ app.get("/news/item/:id", function (req, res) {
       if (err || !newsitem) {
         return res.status(500).send(err)
       } else {
-        res.render("singlenews.ejs", { 
-          newsitem: newsitem, 
-          user: req.user, 
-          comments: comments, 
-          moment: moment })
+        if (newsitem.Kategória == "Esemény") {
+          Event.findOne({"url":newsitem.ID}, function(err, itm) {
+            if (err) {
+              console.log(err)
+            } else {
+              res.render("singlenews.ejs", {
+              newsitem: newsitem, 
+              user: req.user, 
+              comments: comments, 
+              moment: moment,
+              event: itm,
+              isuserin : isuserin
+             })
+            }
+          })  
+        } else {
+          res.render("singlenews.ejs", {
+            newsitem: newsitem, 
+            user: req.user, 
+            comments: comments, 
+            moment: moment })
+        }
+
       }
+       
     })
   })
 

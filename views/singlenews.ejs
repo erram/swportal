@@ -11,6 +11,8 @@
 </head>
 <body>
   <% include header %>
+  <p style="display:none" id="eventhelper"><%= event.participants %></p>
+  <p style="display:none" id="eventhelper2"><%= user.local.username %></p>
   <div id="main-content" class="container">
     <div class="article-box">
       <div class="date-box">
@@ -29,14 +31,30 @@
       </div>    
       <div class="article-body">
         <%- newsitem.Tartalom %>
+        <% if (newsitem.Kategória == "Esemény" && user) {%>
+          <form id="participate" class="form-inline" action="/events/participate/<%= user.local.username %>/<%= newsitem.ID%>" method="POST">
+            <div class="form-group mb-12">
+              <label>Jelentkezz erre az eseményre te is!</label>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Jelentkezem!</button>
+          </form>
+        <% } %>
+        <hr>
+        <div class="participants">
+          <label>Akik már jelentkeztek:</label>
+          <% for(i=0; i<event.participants.length; i++) {%>
+          <span><%= event.participants[i] %>,&nbsp;</span>
+          <% } %>
+        </div>
       </div>
     </div>
     <div class="article-comment-list">
-      
+
       <% if(user) {%>
       <form action="/news/commentsave/:<%= newsitem.ID %>" method="POST">
-        <textarea id="edit" name="editor_content"></textarea>
-        <button class="btn btn-success">Hozzászólok</button>
+        <textarea style="height: 50px;width: 100%;margin: 10px 0px;" id="edit" name="editor_content"></textarea>
+        <button style="float:right;" class="btn btn-success">Hozzászólok</button>
+        <div style="clear:both;"></div>
       </form>
       
       <% } else {%>
@@ -64,5 +82,26 @@
   </div>
   <% include footer %>
 <script src="../../js/app-min.js"></script>
+<script>
+  $(document).ready(function(){
+    var partipForm = $("#participate");
+    var isuserin = false;
+    var user = $("#eventhelper2").text();
+    var string = $("#eventhelper").text();
+    var tmp = string.split(",")
+    for (i = 0; i < <%- event.participants.length %>; i++) {
+      
+      if ( user == tmp[i] ){
+        isuserin = true
+      }
+    }
+
+    if(isuserin) {
+      partipForm.hide();
+    } else {
+      partipForm.show();
+    }
+  })
+</script>
 </body>
 </html>
