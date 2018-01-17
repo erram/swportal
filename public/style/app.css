@@ -123,7 +123,8 @@ h5 {
     .site-navigation .mobile-nav {
       display: none; }
     .site-navigation nav ul {
-      text-align: center; }
+      text-align: center;
+      float: left; }
       .site-navigation nav ul::after {
         display: block;
         content: "";
@@ -167,7 +168,20 @@ h5 {
               font-size: 12px;
               color: #555; }
               .site-navigation nav ul li .dropdown li a:hover {
-                color: #428bca; } }
+                color: #428bca; }
+    .site-navigation .namesearch, .site-navigation .userhandle {
+      float: right; }
+    .site-navigation .userhandle {
+      padding: 13px; }
+      .site-navigation .userhandle table tr td {
+        color: white;
+        font-size: 12px; }
+      .site-navigation .userhandle table tr .spacer {
+        padding: 0 5px; }
+    .site-navigation .namesearch {
+      padding: 9px 0 9px 5px; }
+      .site-navigation .namesearch input {
+        border: none; } }
 
 @media (max-width: 1000px) {
   .site-navigation {
@@ -185,7 +199,8 @@ h5 {
       display: block;
       padding: 10px;
       text-align: center;
-      color: #428bca; }
+      color: #428bca;
+      float: left; }
     .site-navigation nav.open ul {
       display: block; }
     .site-navigation nav ul {
@@ -218,7 +233,20 @@ h5 {
           position: relative;
           top: 10px; }
           .site-navigation nav ul li .dropdown li {
-            background: #fff; } }
+            background: #fff; }
+    .site-navigation .namesearch, .site-navigation .userhandle {
+      float: right; }
+    .site-navigation .userhandle {
+      padding: 13px; }
+      .site-navigation .userhandle table tr td {
+        color: white;
+        font-size: 12px; }
+      .site-navigation .userhandle table tr .spacer {
+        padding: 0 5px; }
+    .site-navigation .namesearch {
+      padding: 9px 0 9px 5px; }
+      .site-navigation .namesearch input {
+        border: none; } }
 
 #main-content {
   background: #ecedef;

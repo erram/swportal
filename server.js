@@ -32,21 +32,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.set("view engine", "ejs") // set up ejs for templating
 
-app.get("/", function(req, res) {
-  News.find({
-    Publikálva: "true"
-  })
-    .limit(6)
-    .sort({ Dátum: -1 }).exec(function(err,newsitems){
-      if(newsitems){
-        res.render("index.ejs", {newsitems:newsitems,trunc:trunc,moment:moment})
-      } else {
-        console.log(err)
-      }
-    })
-  
-})
-
 // required for passport
 app.use(
   session({
@@ -57,8 +42,24 @@ app.use(
 )
 
 app.use(passport.initialize())
-app.use(passport.session()) // persistent login sessions
+app.use(passport.session()) // persistent login session
 app.use(flash()) // use connect-flash for flash messages stored in session
+
+app.get("/", function(req, res) {
+  News.find({
+    Publikálva: "true"
+  })
+    .limit(6)
+    .sort({ Dátum: -1 }).exec(function(err,newsitems){
+      if(newsitems){
+        console.log(req.user)
+        res.render("index.ejs", {newsitems:newsitems,trunc:trunc,moment:moment, user: req.user})
+      } else {
+        console.log(err)
+      }
+    })
+  
+})
 
 require("./app/routes")
 app.listen(port)

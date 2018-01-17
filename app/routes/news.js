@@ -57,8 +57,7 @@ app.get("/news/item/:id", function (req, res) {
               user: req.user, 
               comments: comments, 
               moment: moment,
-              event: itm,
-              isuserin : isuserin
+              event: itm
              })
             }
           })  

@@ -20,6 +20,7 @@
       ul {
         @include clearfix;
         text-align: center;
+        float: left;
   
         li {
           position: relative;
@@ -80,6 +81,31 @@
         }
       }
     }
+    .namesearch, .userhandle {
+      float: right;
+    }
+    .userhandle {
+      padding: 13px;
+
+      table {
+        tr {
+          td {
+            color: white;
+            font-size: 12px;
+          }
+          .spacer {
+            padding: 0 5px;
+          }
+        }
+      }
+    }
+    .namesearch {
+      padding: 9px 0 9px 5px;
+
+      input {
+        border: none;
+      }
+    }
   }
 }
 
@@ -102,6 +128,7 @@
       padding: 10px;
       text-align: center;
       color: #428bca;
+      float: left;
     }
   
     nav {
@@ -156,6 +183,32 @@
           
           }
         }
+      }
+    }
+
+    .namesearch, .userhandle {
+      float: right;
+    }
+    .userhandle {
+      padding: 13px;
+
+      table {
+        tr {
+          td {
+            color: white;
+            font-size: 12px;
+          }
+          .spacer {
+            padding: 0 5px;
+          }
+        }
+      }
+    }
+    .namesearch {
+      padding: 9px 0 9px 5px;
+
+      input {
+        border: none;
       }
     }
   }

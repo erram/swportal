@@ -26,7 +26,7 @@ app.get("/logout", function(req, res) {
 })
 
 app.get("/login", function(req, res) {
-  res.render("login.ejs", { message: req.flash("loginMessage") })
+  res.render("login.ejs", { message: req.flash("loginMessage"),user:req.user })
 })
 
 app.post(
@@ -39,7 +39,7 @@ app.post(
 )
 
 app.get("/signup", function(req, res) {
-  res.render("signup.ejs", { message: req.flash("signupMessage") })
+  res.render("signup.ejs", { message: req.flash("signupMessage"),user:req.user })
 })
 
 app.post(
