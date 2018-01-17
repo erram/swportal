@@ -42,6 +42,7 @@ gulp.task('serve', ['sass', 'js', 'compress'], function(){
 
   gulp.run('compress');
 
+  /*
   browserSync({
     notify: false,
     port: 8080,
@@ -52,5 +53,5 @@ gulp.task('serve', ['sass', 'js', 'compress'], function(){
     middleware: [
       historyApiFallback()
     ]
-  });
+  });*/
 });

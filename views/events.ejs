@@ -118,7 +118,8 @@
 				start: new Date(startdate.getFullYear(), startdate.getMonth(), startdate.getDate()-1, startdate.getHours(), startdate.getMinutes()),
 				end: new Date(enddate.getFullYear(), enddate.getMonth(), enddate.getDate()-1, enddate.getHours(), enddate.getMinutes()),
 				allDay: allday,
-				className: temp[i].className
+				className: temp[i].className,
+				url: temp[i].url 
 			}
 
 			json.push(obj);
