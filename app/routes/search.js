@@ -19,3 +19,14 @@ app.post("/search/autocomplete", function(req, res) {
       })
 	
 })
+
+app.get("/card/single/:name", function(req, res) {
+    Card.findOne({"Név": new RegExp(req.params.name, 'i')} ,function(err, itms) {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.render("singlecard.ejs",{card: itms, user:req.body.user})
+        }
+      })
+})
+

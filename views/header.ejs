@@ -70,18 +70,18 @@
                     $("#suggesstion-box").empty();              
                     var temp = JSON.parse(data);
                     for(i=0; i < temp.length; i++) {
-                        $("#suggesstion-box").append("<a href='/card/"+temp[i].Név+"'>"+temp[i].Név+"</a>")
+                        $("#suggesstion-box").append("<a href='/card/single/"+temp[i].Név+"'>"+temp[i].Név+"</a>")
                     }
                     $("#suggesstion-box").show();
                     $("#search-box").css("background","#FFF");
                 }
                 });
-            });
+            });/*
             $("#search-box").focusout(function(){
                 $("#search-box").val("");
                 $("#suggesstion-box").empty(); 
                 $("#suggesstion-box").hide();
-            })
+            })*/
         });
         </script>
     </header>

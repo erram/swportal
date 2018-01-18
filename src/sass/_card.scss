@@ -1,0 +1,40 @@
+.card-content {
+    div {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .card-text {
+        border-left-width: 2px;
+        border-left-style: solid;
+        text-align: justify;
+
+        p {
+            margin: 6px;
+        }
+    }
+}
+
+.panel-title {
+    font-weight: bold;
+    font-size: 16px;
+    .card-subtitle {
+        font-size: 0.8em;
+        font-weight: normal;
+    }
+}
+
+.Kék {
+    .panel-heading {
+        background-color: #0b609e !important;
+        color: white !important;
+    }
+    
+    .card-text {
+        border-color: #0b609e !important;
+    }
+}
+
+.cardimage img {
+    width: 100%;
+}

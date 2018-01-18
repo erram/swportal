@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../style/app.css">
+    <script src="../../jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <% include header %>
+        <div id="main-content" class="container">
+            <div class="row card container">
+                <div class="col-md-4 cardimage">
+                    <img src="../../card_pictures/<%= card.Kiadás %>/<%= card.Sorszám %>.jpg">
+                </div>
+                <div class="col-md-8 cardinfo">
+                    <div class="panel panel-default <%= card.Frakció%>">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="icon-unique"></span><%= card.Név %><span class="card-subtitle"> - <%= card.Szinesítő %></span>
+                            </h3>
+                        </div>
+                        <div class="panel-body card-content">
+                            <div class="card-faction">
+                                <span class="card-affiliation"><%= card.Oldal%></span>.
+                                <span class="card-faction"><%= card.Frakció%></span>.	
+                                <span class="card-rarity"><%= card.Ritkaság%></span>.
+                            </div>        					
+                            <div class="card-info">
+                                <span class="card-type"><b><%= card.Típus%></b>.</span>
+                                <span class="card-props"><span class="card-props">Pontérték: <%= card.Pontérték%>. Életerő: <%= card.Életerő %>.</span></span>
+                            </div>
+
+                            <div class="card-text border-blue">
+                                <p><%= card.Szövegmező %></p>
+                            </div>                            
+                            <div class="card-flavor small">
+                                <%= card.Idézet %>
+                            </div>        					
+                            <div class="card-illustrator">
+                                <span class="fa fa-paint-brush text-muted"></span>
+                                <%= card.Illusztrátor %>
+                            </div>
+                            <div class="card-set"><span class="icon-set-AW"></span> <%= card.Kiadás%> #<%= card.Sorszám%>.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <% include footer %>
+    <script src="../../js/app-min.js"></script>
+</body>
+
+</html>
