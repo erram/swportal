@@ -35,10 +35,9 @@
             <div class="mobile-nav">
                <a class="open-menu" href=""> MENÜ <i class="fa fa-bars" aria-hidden="true"></i></a>
             </div>
-            <div class="namesearch">
-                <form action="/search/byname" method="POST">
-                    <input type="text" placeholder="keresés..."></input>
-                </form>
+            <div class="namesearch frmSearch">
+                <input id="search-box" type="text" placeholder="keresés..."></input>
+                <div id="suggesstion-box"></div>
             </div>
             <div class="userhandle">
             <% if(user) {%>
@@ -57,5 +56,32 @@
             </div>
             
         </div>
-        
+        <script>
+        $(document).ready(function(){
+            $("#search-box").keyup(function(){
+                $.ajax({
+                type: "POST",
+                url: "/search/autocomplete",
+                data:'keyword='+$(this).val(),
+                beforeSend: function(){
+                    $("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+                },
+                success: function(data){   
+                    $("#suggesstion-box").empty();              
+                    var temp = JSON.parse(data);
+                    for(i=0; i < temp.length; i++) {
+                        $("#suggesstion-box").append("<a href='/card/"+temp[i].Név+"'>"+temp[i].Név+"</a>")
+                    }
+                    $("#suggesstion-box").show();
+                    $("#search-box").css("background","#FFF");
+                }
+                });
+            });
+            $("#search-box").focusout(function(){
+                $("#search-box").val("");
+                $("#suggesstion-box").empty(); 
+                $("#suggesstion-box").hide();
+            })
+        });
+        </script>
     </header>

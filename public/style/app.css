@@ -181,7 +181,18 @@ h5 {
     .site-navigation .namesearch {
       padding: 9px 0 9px 5px; }
       .site-navigation .namesearch input {
-        border: none; } }
+        border: none; }
+    .site-navigation #suggesstion-box {
+      max-height: 300px;
+      background-color: white;
+      width: 195px;
+      overflow-y: scroll;
+      font-size: 12px;
+      overflow-x: hidden; }
+      .site-navigation #suggesstion-box a {
+        display: block;
+        padding: 3px;
+        color: black; } }
 
 @media (max-width: 1000px) {
   .site-navigation {
@@ -246,7 +257,18 @@ h5 {
     .site-navigation .namesearch {
       padding: 9px 0 9px 5px; }
       .site-navigation .namesearch input {
-        border: none; } }
+        border: none; }
+    .site-navigation #suggesstion-box {
+      max-height: 300px;
+      background-color: white;
+      width: 195px;
+      overflow-y: scroll;
+      font-size: 12px;
+      overflow-x: hidden; }
+      .site-navigation #suggesstion-box a {
+        display: block;
+        padding: 3px;
+        color: black; } }
 
 #main-content {
   background: #ecedef;
