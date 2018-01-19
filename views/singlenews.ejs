@@ -11,8 +11,14 @@
 </head>
 <body>
   <% include header %>
-  <p style="display:none" id="eventhelper"><%= event.participants %></p>
-  <p style="display:none" id="eventhelper2"><%= user.local.username %></p>
+  <% if(event) {%>
+    <p style="display:none" id="eventhelper"><%= event.participants %></p>
+  <% } %>
+  
+  <% if(user) {%>
+    <p style="display:none" id="eventhelper2"><%= user.local.username %></p>
+  <% } %>
+  
   <div id="main-content" class="container">
     <div class="article-box">
       <div class="date-box">
@@ -40,12 +46,14 @@
           </form>
         <% } %>
         <hr>
+        <% if(event) {%>
         <div class="participants">
           <label>Akik már jelentkeztek:</label>
           <% for(i=0; i<event.participants.length; i++) {%>
           <span><%= event.participants[i] %>,&nbsp;</span>
           <% } %>
         </div>
+        <% } %>
       </div>
     </div>
     <div class="article-comment-list">
@@ -89,7 +97,7 @@
     var user = $("#eventhelper2").text();
     var string = $("#eventhelper").text();
     var tmp = string.split(",")
-    for (i = 0; i < <%- event.participants.length %>; i++) {
+    for (i = 0; i < tmp.length; i++) {
       
       if ( user == tmp[i] ){
         isuserin = true

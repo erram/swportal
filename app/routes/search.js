@@ -4,7 +4,7 @@ var Card = require('../models/card')
 
 //Minden kártya kiirása
 app.get("/search", function(req, res) {
-    res.render("search.ejs")
+    res.render("search.ejs", {user: req.body.user})
 })
 
 app.post("/search/autocomplete", function(req, res) {
@@ -28,5 +28,16 @@ app.get("/card/single/:name", function(req, res) {
             res.render("singlecard.ejs",{card: itms, user:req.body.user})
         }
       })
+})
+
+app.post("/search/advanced", function(req, res) {
+    if (req.body.text) {
+        console.log("fasz")
+        console.log(req.body)
+    } else {
+        console.log("pina")
+        console.log(req.body)
+    }
+    res.status(200).redirect("/search")
 })
 

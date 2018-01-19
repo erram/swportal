@@ -25,6 +25,7 @@
 }
 
 .Kék {
+    border: 1px solid #0b609e;
     .panel-heading {
         background-color: #0b609e !important;
         color: white !important;
@@ -34,6 +35,19 @@
         border-color: #0b609e !important;
     }
 }
+
+.Sárga {
+    border: 1px solid #ffba37;
+    .panel-heading {
+        background-color: #ffba37 !important;
+        color: white !important;
+    }
+    
+    .card-text {
+        border-color: #ffba37 !important;
+    }
+}
+
 
 .cardimage img {
     width: 100%;

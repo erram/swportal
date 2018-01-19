@@ -30,11 +30,11 @@
     <% include header %>
         <div id="main-content" class="container">
             <h2 class="text-center">Kártya kereső</h2>
-            <form action="">
+            <form action="/search/advanced" method="POST">
                 <div class="form-inline text-center">
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="search-input" aria-describedby="Kereső mező">
+                        <input type="text" class="form-control" id="search-input" aria-describedby="Kereső mező" name="field">
                     </div>
 
                     <div class="form-group">
@@ -45,25 +45,25 @@
 
                 <div class="form-inline text-center">
                     <div class="form-group">
-                        <input class="form-check-input" type="checkbox" value="" id="name">
+                        <input class="form-check-input" type="checkbox" value="true" id="name" name="name">
                         <label class="form-check-label" for="name">
                             Név alapján
                         </label>
                     </div>
                     <div class="form-group">
-                        <input class="form-check-input" type="checkbox" value="" id="text">
+                        <input class="form-check-input" type="checkbox" value="true" id="text" name="text">
                         <label class="form-check-label" for="text">
                             Szöveg alapján
                         </label>
                     </div>
                     <div class="form-group">
-                        <input class="form-check-input" type="checkbox" value="" id="illustrator">
+                        <input class="form-check-input" type="checkbox" value="true" id="illustrator" name="illustrator">
                         <label class="form-check-label" for="illustrator">
                             Illusztrátor alapján
                         </label>
                     </div>
                     <div class="form-group">
-                        <input class="form-check-input" type="checkbox" value="" id="quote">
+                        <input class="form-check-input" type="checkbox" value="true" id="quote" name="quote">
                         <label class="form-check-label" for="quote">
                             Idézet alapján
                         </label>
@@ -76,22 +76,22 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Kék - Erő
+                                <input type="checkbox" name="color" value="blue"> Kék - Erő
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Piros - Hadsereg
+                                <input type="checkbox" name="color" value="red"> Piros - Hadsereg
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Sárga - Szerencsevadászok
+                                <input type="checkbox" name="color" value="yellow"> Sárga - Szerencsevadászok
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Szürke - Egyéb
+                                <input type="checkbox" name="color" value="gray"> Szürke - Egyéb
                             </label>
                         </div>
                         <div class="form-group">
@@ -99,17 +99,17 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                    <input type="checkbox"> Gonosz
+                                    <input type="checkbox" name="side" value="bad"> Gonosz
                                 </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                    <input type="checkbox"> Hős
+                                    <input type="checkbox" name="side" value="hero"> Hős
                                 </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                    <input type="checkbox"> Semleges
+                                    <input type="checkbox" name="side" value="neutral"> Semleges
                                 </label>
                         </div>
                     </div>
@@ -119,32 +119,32 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Karakter
+                                <input type="checkbox" name="type" value="character"> Karakter
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Fejlesztés
+                                <input type="checkbox" name="type" value="upgrade"> Fejlesztés
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Támogatás
+                                <input type="checkbox" name="type" value="assist"> Támogatás
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Esemény
+                                <input type="checkbox" name="type" value="event"> Esemény
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Csatatér
+                                <input type="checkbox" name="type" value="battlefield"> Csatatér
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Terv
+                                <input type="checkbox" name="type" value="plan"> Terv
                             </label>
                         </div>
                     </div>
@@ -154,55 +154,55 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                        <input type="checkbox"> Ritkaság
+                                        <input type="checkbox" name="rarity" value="rare"> Ritkaság
                                     </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                        <input type="checkbox"> Gyakori
+                                        <input type="checkbox" name="rarity" value="common"> Gyakori
                                     </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                        <input type="checkbox"> Nem gyakori
+                                        <input type="checkbox" name="rarity" value="uncommon"> Nem gyakori
                                     </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                        <input type="checkbox"> Ritka
+                                        <input type="checkbox" name="rarity" value="rare"> Ritka
                                     </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                        <input type="checkbox"> Legendás
+                                        <input type="checkbox" name="rarity" value="legend"> Legendás
                                     </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Kezdőcsomag
+                                <input type="checkbox" name="rarity" value="starter"> Kezdőcsomag
                             </label>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="">Altípus</label>
-                            <select class="form-control">
-                                <option>Képesség</option>
-                                <option>Felszerelés</option>
-                                <option>Fegyver</option>
-                                <option>Jármű</option>
-                                <option>Droid</option>
+                            <select class="form-control" name="subtype">
+                                <option value="skill">Képesség</option>
+                                <option value="equipment">Felszerelés</option>
+                                <option value="weapon">Fegyver</option>
+                                <option value="wehicle">Jármű</option>
+                                <option value="droid">Droid</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">Kiadás</label>
-                            <select class="form-control">
-                                    <option>Ébredések</option>
-                                    <option>Lázadás</option>
-                                    <option>Birodalom fegyverben</option>
-                                    <option>Kétjátékos szett</option>
-                                    <option>Örökség</option>
-                                    <option>Riválisok</option>
+                            <select class="form-control" name="set">
+                                    <option value="ebredesek">Ébredések</option>
+                                    <option value="lazadas">Lázadás</option>
+                                    <option value="birodalom">Birodalom fegyverben</option>
+                                    <option value="ketjatekos">Kétjátékos szett</option>
+                                    <option value="orokseg">Örökség</option>
+                                    <option value="rivalisok">Riválisok</option>
                                 </select>
                         </div>
                         <div class="form-group sm-inputs">
@@ -211,21 +211,21 @@
                                     <label for="">Erőforrásköltség</label>
                                     <div class="form-inline">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Min" id="">
+                                            <input type="text" class="form-control" placeholder="Min" id="" name="forceMinMax">
                                         </div>
                                         -
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Max" id="">
+                                            <input type="text" class="form-control" placeholder="Max" id="" name="forceMinMax">
                                         </div>
                                     </div>
                                     <label for="">Pont</label>
                                     <div class="form-inline">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Min" id="">
+                                            <input type="text" class="form-control" placeholder="Min" id="" name="pointMinMax">
                                         </div>
                                         -
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Max" id="">
+                                            <input type="text" class="form-control" placeholder="Max" id="" name="pointMinMax">
                                         </div>
                                     </div>
                                 </div>
@@ -233,11 +233,11 @@
                                     <label for="">Életerő</label>
                                     <div class="form-inline">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Min" id="">
+                                            <input type="text" class="form-control" placeholder="Min" id="" name="lifeMinMax">
                                         </div>
                                         -
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Max" id="">
+                                            <input type="text" class="form-control" placeholder="Max" id="" name="lifeMinMax">
                                         </div>
                                     </div>
                                 </div>
@@ -249,11 +249,10 @@
 
 
                 </div>
+            </form>
 
         </div>
 
-        </form>
-        </div>
         <% include footer %>
             <script src="js/app-min.js"></script>
 </body>

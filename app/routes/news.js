@@ -9,7 +9,7 @@ var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js')
 
 //Hír szerkeztő
 app.get("/news", isLoggedIn, function (req, res) {
-  res.render("news.ejs")
+  res.render("news.ejs", {user:req.body.user})
 })
 
 app.post("/news/update/:id", isLoggedIn, function (req, res) {
@@ -66,7 +66,9 @@ app.get("/news/item/:id", function (req, res) {
             newsitem: newsitem, 
             user: req.user, 
             comments: comments, 
-            moment: moment })
+            moment: moment,
+            event: null
+           })
         }
 
       }

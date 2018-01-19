@@ -19,7 +19,8 @@ app.get("/admin", isLoggedIn, isAdmin, function(req, res) {
             usr: req.user.local.email,
             moment: moment,
             users: users,
-            events: events
+            events: events,
+            user: req.body.user
           })
         }
       })

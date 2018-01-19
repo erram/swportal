@@ -8,7 +8,7 @@ app.get("/events", function(req, res) {
       console.log(err)
     } else {
       console.log(itms)
-      res.render("events.ejs", { itms: JSON.stringify(itms), moment: moment })
+      res.render("events.ejs", { itms: JSON.stringify(itms), moment: moment, user: req.body.user })
     }
   })
 })
