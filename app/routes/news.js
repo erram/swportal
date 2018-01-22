@@ -5,6 +5,7 @@ var News = require('../models/newsitem')
 var Comment = require('../models/comment')
 var Event = require('../models/events')
 var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js')
+var multer = require("multer");
 
 
 //Hír szerkeztő
@@ -159,3 +160,18 @@ app.post("/news/uploadimage", function (req, res) {
     res.send(data);
   });
 })
+
+
+var storage = multer.diskStorage({
+    destination: function(req, file, callback){
+        callback(null, 'public/uploaded_images'); // set the destination
+    },
+    filename: function(req, file, callback){
+        callback(null, Date.now() + '.jpg'); // set the file name and extension
+    }
+});
+var upload = multer({storage: storage});
+app.post('/news/cover', upload.single('imagename'), function(req, res, next) {
+    
+   /** rest */ 
+});

@@ -64,6 +64,11 @@
 
             <div class="row">
                 <div class="sample">
+                    <form class="uploadImage" enctype="multipart/form-data" action="/news/cover" method="POST">
+                        <input type="text" id="title">
+                        <input type="file" name="imagename" id="imagename">
+                        <input type="submit" name="submit" value="Submit">
+                    </form>
                     <form action="/news/save" method="POST">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hír címe</label>
@@ -86,6 +91,24 @@
                 
                 <script>
                     $(function () {
+                        $('.uploadImage').submit(function(e){
+                            e.preventDefault();
+                            
+                            var title = $('#title').val(); 
+                            
+                            $.ajax({
+                            data: {title: title},
+                            type: 'POST',
+                            url: '/news/cover',
+                            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                            success: function(response){
+                                console.log('image uploaded and form submitted');     
+                            }
+                        });
+                            return false;
+                        });
+
+
                         var titletext = "inittext";
                         $('#edit').froalaEditor({
                             imageUploadURL: '/news/uploadimage',

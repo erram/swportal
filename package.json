@@ -4,6 +4,7 @@
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.15.2",
+    "bower": "^1.8",
     "connect-flash": "~0.1.1",
     "cookie-parser": "~1.4.3",
     "ejs": "~2.5.2",
@@ -23,7 +24,6 @@
     "passport-twitter": "~1.0.4",
     "truncate": "^2.0.0",
     "uuid": "^3.1.0",
-    "wysiwyg-editor-node-sdk": "^2.3.4-rc.1",
-    "bower": "^1.8"
+    "wysiwyg-editor-node-sdk": "^2.3.4-rc.1"
   }
 }
