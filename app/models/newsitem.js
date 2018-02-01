@@ -13,7 +13,8 @@ var newsitemdSchema = mongoose.Schema({
     SzerzőID: Schema.Types.ObjectId,
     Publikálva: Boolean,
     Kategória: String,
-    commentecounter: Number
+    commentecounter: Number,
+    coverimage: String
 });
 
 // create the model for cards and expose it to our app
