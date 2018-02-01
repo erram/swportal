@@ -61,8 +61,15 @@
                 success: function(data){   
                     $("#suggesstion-box").empty();              
                     var temp = JSON.parse(data);
+                    var Szinesítő = "";
                     for(i=0; i < temp.length; i++) {
-                        $("#suggesstion-box").append("<a href='/card/single/"+temp[i].Név+"'>"+temp[i].Név+"</a>")
+                        console.log(temp[i].Szinesítő)
+                        if(temp[i].Szinesítő != undefined) {
+                            Szinesítő = " - "+temp[i].Szinesítő
+                        } else {
+                            Szinesítő = ""
+                        }
+                        $("#suggesstion-box").append("<a href='/card/single/"+temp[i].Kiadás+"/"+temp[i].Sorszám+"'><b>"+temp[i].Név+"</b>"+Szinesítő+"</a>")
                     }
                     $("#suggesstion-box").show();
                     $("#search-box").css("background","#FFF");

@@ -8,9 +8,8 @@ app.get("/search", function(req, res) {
 })
 
 app.post("/search/autocomplete", function(req, res) {
-    console.log("hello")
     var keyword = req.body.keyword
-    Card.find({"Név":new RegExp(keyword, 'i')},'Név',function(err, itms) {
+    Card.find({"Név":new RegExp(keyword, 'i')},['Név','Szinesítő','Kiadás','Sorszám'],function(err, itms) {
         if (err) {
             res.status(500).send(err)
         } else {
@@ -20,8 +19,8 @@ app.post("/search/autocomplete", function(req, res) {
 	
 })
 
-app.get("/card/single/:name", function(req, res) {
-    Card.findOne({"Név": new RegExp(req.params.name, 'i')} ,function(err, itms) {
+app.get("/card/single/:kiadas/:sorszam", function(req, res) {
+    Card.findOne({"Kiadás": new RegExp(req.params.name, 'i'),"Sorszám": req.params.sorszam,"Kiadás": req.params.kiadas} ,function(err, itms) {
         if (err) {
             res.status(500).send(err)
         } else {

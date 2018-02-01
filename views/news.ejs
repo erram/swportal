@@ -93,16 +93,16 @@
                     $(function () {
                         $('.uploadImage').submit(function(e){
                             e.preventDefault();
-                            
+                            var formData = new FormData($(this)[0]);                          
                             var title = $('#title').val(); 
                             
                             $.ajax({
-                            data: {title: title},
+                            data: formData,
                             type: 'POST',
                             url: '/news/cover',
-                            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                            async: true,
                             success: function(response){
-                                console.log('image uploaded and form submitted');     
+                                console.log('image uploaded and form submitted'+data);     
                             }
                         });
                             return false;

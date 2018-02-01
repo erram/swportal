@@ -175,3 +175,7 @@ app.post('/news/cover', upload.single('imagename'), function(req, res, next) {
     
    /** rest */ 
 });
+
+app.get("/newslist", function (req, res) {
+
+})
