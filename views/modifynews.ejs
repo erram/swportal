@@ -67,7 +67,7 @@
                     <form action="/news/update/<%= newsitem.ID %>" method="POST">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hír címe</label>
-                            <input class="form-control" id="title" name="editor_title" placeholder="<%= newsitem.Cím %>"></input>
+                            <input class="form-control" id="title" name="editor_title" placeholder="<%= newsitem.Cím %>"  value="<%= newsitem.Cím %>"></input>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Kategória</label>
