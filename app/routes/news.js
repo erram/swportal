@@ -83,7 +83,7 @@ app.get("/news/edit/:id", function (req, res) {
     if (err || !newsitem) {
       return res.status(500).send(err)
     }
-    res.render("modifynews.ejs", { newsitem: newsitem })
+    res.render("modifynews.ejs", { newsitem: newsitem, user:req.user })
   })
 });
 

@@ -4,7 +4,7 @@ var Card = require('../models/card')
 
 //Minden kártya kiirása
 app.get("/search", function(req, res) {
-    res.render("search.ejs", {user: req.body.user})
+    res.render("search.ejs", {user: req.user})
 })
 
 app.post("/search/autocomplete", function(req, res) {
@@ -24,7 +24,7 @@ app.get("/card/single/:kiadas/:sorszam", function(req, res) {
         if (err) {
             res.status(500).send(err)
         } else {
-            res.render("singlecard.ejs",{card: itms, user:req.body.user})
+            res.render("singlecard.ejs",{card: itms, user:req.user})
         }
       })
 })
