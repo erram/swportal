@@ -108,7 +108,7 @@
                               </div>
                               <div class="comment-body">
                                 <% if(user) {%>
-                                  <% if(user.local.username == comments[i].pusername && user.local.role == "Admin") {%>
+                                  <% if(user.local.username == comments[i].pusername || user.local.role == "Admin") {%>
                                     <div id="delete_comment" class="<%= comments[i].id %>">
                                       <i class="fa fa-edit"></i>
                                     </div>
