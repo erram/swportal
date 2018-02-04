@@ -1,115 +1,176 @@
 <!doctype html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../style/app.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <style>
-        
-    </style>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../style/app.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <style>
+    #delete_comment {
+      float: right;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
   <% include header %>
-  <% if(event) {%>
-    <p style="display:none" id="eventhelper"><%= event.participants %></p>
-  <% } %>
-  
-  <% if(user) {%>
-    <p style="display:none" id="eventhelper2"><%= user.local.username %></p>
-  <% } %>
-  
-  <div id="main-content" class="container">
-    <div class="article-box">
-      <div class="date-box">
-        <span class="day">30</span>
-        <span class="mo-ye">Nov 2017</span>
-      </div>
-      
-      <div class="article-head">
-        <h2><%= newsitem.Cím %></h2>
+    <% if(event) {%>
+      <p style="display:none" id="eventhelper">
+        <%= event.participants %>
+      </p>
+      <% } %>
 
-        <div class="article-details">
-          <span class="publisher"><a href=""><%= newsitem.Szerző %></a></span>
-          <span class="category"><a href=""><%= newsitem.Kategória %></a></span>
-          <span class="tags"><a href="">tag1</a>, <a href="">lorem ipsum tag2</a>, <a href="">lorem tag3</a>,</span>
-        </div>
-      </div>    
-      <div class="article-body">
-        <%- newsitem.Tartalom %>
-        <% if (newsitem.Kategória == "Esemény" && user) {%>
-          <form id="participate" class="form-inline" action="/events/participate/<%= user.local.username %>/<%= newsitem.ID%>" method="POST">
-            <div class="form-group mb-12">
-              <label>Jelentkezz erre az eseményre te is!</label>
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">Jelentkezem!</button>
-          </form>
-        <% } %>
-        <hr>
-        <% if(event) {%>
-        <div class="participants">
-          <label>Akik már jelentkeztek:</label>
-          <% for(i=0; i<event.participants.length; i++) {%>
-          <span><%= event.participants[i] %>,&nbsp;</span>
+        <% if(user) {%>
+          <p style="display:none" id="eventhelper2">
+            <%= user.local.username %>
+          </p>
           <% } %>
-        </div>
-        <% } %>
-      </div>
-    </div>
-    <div class="article-comment-list">
 
-      <% if(user) {%>
-      <form action="/news/commentsave/:<%= newsitem.ID %>" method="POST">
-        <textarea style="height: 50px;width: 100%;margin: 10px 0px;" id="edit" name="editor_content"></textarea>
-        <button style="float:right;" class="btn btn-success">Hozzászólok</button>
-        <div style="clear:both;"></div>
-      </form>
-      
-      <% } else {%>
-        <a class="forum-link" href="#">ha hozzászólnál, kérlek lépj be!</a>
-      <% } %>
-      
-      <% if(comments) {%>
-        <% for(var i=0; i < comments.length; i++) { %>
-          <div class="article-comment">
-            <div class="comment-head">
-              <a class="user-name" href="#"><%= comments[i].pusername %></a>
-              <span class="date"><%= moment(comments[i].date).format("YYYY-MM-DD HH:mm") %></span>
+            <div id="main-content" class="container">
+              <div class="article-box">
+                <div class="date-box">
+                  <span class="day">30</span>
+                  <span class="mo-ye">Nov 2017</span>
+                </div>
+
+                <div class="article-head">
+                  <h2>
+                    <%= newsitem.Cím %>
+                  </h2>
+
+                  <div class="article-details">
+                    <span class="publisher">
+                      <a href="">
+                        <%= newsitem.Szerző %>
+                      </a>
+                    </span>
+                    <span class="category">
+                      <a href="">
+                        <%= newsitem.Kategória %>
+                      </a>
+                    </span>
+                    <span class="tags">
+                      <a href="">tag1</a>,
+                      <a href="">lorem ipsum tag2</a>,
+                      <a href="">lorem tag3</a>,</span>
+                  </div>
+                </div>
+                <div class="article-body">
+                  <%- newsitem.Tartalom %>
+                    <% if (newsitem.Kategória == "Esemény" && user) {%>
+                      <form id="participate" class="form-inline" action="/events/participate/<%= user.local.username %>/<%= newsitem.ID%>" method="POST">
+                        <div class="form-group mb-12">
+                          <label>Jelentkezz erre az eseményre te is!</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Jelentkezem!</button>
+                      </form>
+                      <% } %>
+                        <hr>
+                        <% if(event) {%>
+                          <div class="participants">
+                            <label>Akik már jelentkeztek:</label>
+                            <% for(i=0; i<event.participants.length; i++) {%>
+                              <span>
+                                <%= event.participants[i] %>,&nbsp;</span>
+                              <% } %>
+                          </div>
+                          <% } %>
+                </div>
+              </div>
+              <div class="article-comment-list">
+
+                <% if(user) {%>
+                  <form action="/news/commentsave/:<%= newsitem.ID %>" method="POST">
+                    <textarea style="height: 50px;width: 100%;margin: 10px 0px;" id="edit" name="editor_content"></textarea>
+                    <button style="float:right;" class="btn btn-success">Hozzászólok</button>
+                    <div style="clear:both;"></div>
+                  </form>
+
+                  <% } else {%>
+                    <a class="forum-link" href="#">ha hozzászólnál, kérlek lépj be!</a>
+                    <% } %>
+
+                      <% if(comments) {%>
+                        <% for(var i=0; i < comments.length; i++) { %>
+                          <% if (comments[i].moderated != true) {%>
+                            <div class="article-comment">
+                              <div class="comment-head">
+                                <a class="user-name" href="#">
+                                  <%= comments[i].pusername %>
+                                </a>
+                                <span class="date">
+                                  <%= moment(comments[i].date).format("YYYY-MM-DD HH:mm") %>
+                                </span>
+
+                              </div>
+                              <div class="comment-body">
+                                <% if(user) {%>
+                                  <% if(user.local.username == comments[i].pusername && user.local.role == "Admin") {%>
+                                    <div id="delete_comment" class="<%= comments[i].id %>">
+                                      <i class="fa fa-edit"></i>
+                                    </div>
+                                  <% } %>
+                                <% } %>
+                                    <p>
+                                      <%= comments[i].content %>
+                                    </p>
+                              </div>
+                            </div>
+                            <% } %>
+                              <% } %>
+                                <% } %>
+
+              </div>
+
             </div>
-            <div class="comment-body">
-              <p>
-                <%= comments[i].content %>
-              </p>
-            </div>
-          </div>
-        <% } %>
-      <% } %>
+            <% include footer %>
+              <script src="../../js/app-min.js"></script>
+              <script>
+                $(document).ready(function () {
 
-    </div>
-    
-  </div>
-  <% include footer %>
-<script src="../../js/app-min.js"></script>
-<script>
-  $(document).ready(function(){
-    var partipForm = $("#participate");
-    var isuserin = false;
-    var user = $("#eventhelper2").text();
-    var string = $("#eventhelper").text();
-    var tmp = string.split(",")
-    for (i = 0; i < tmp.length; i++) {
-      
-      if ( user == tmp[i] ){
-        isuserin = true
-      }
-    }
+                  $("#delete_comment").click(function () {
+                    var id = $(this).attr('class') 
+                    $.ajax
+                      ({
+                        url: '/news/comment_delete/'+id,
+                        type: 'post',
+                        success: function () {
+                          location.reload();
+                        }
+                      });
+                      $(this).parent().parent().remove();
+                      /*
+                      setTimeout(function() {
+                        location.reload();
+                      }, 1000);
+                      */
+                      
+                  })
 
-    if(isuserin) {
-      partipForm.hide();
-    } else {
-      partipForm.show();
-    }
-  })
-</script>
+
+
+                  var partipForm = $("#participate");
+                  var isuserin = false;
+                  var user = $("#eventhelper2").text();
+                  var string = $("#eventhelper").text();
+                  var tmp = string.split(",")
+                  for (i = 0; i < tmp.length; i++) {
+
+                    if (user == tmp[i]) {
+                      isuserin = true
+                    }
+                  }
+
+                  if (isuserin) {
+                    partipForm.hide();
+                  } else {
+                    partipForm.show();
+                  }
+                })
+              </script>
 </body>
+
 </html>

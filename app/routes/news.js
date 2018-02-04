@@ -87,6 +87,28 @@ app.get("/news/edit/:id", function (req, res) {
   })
 });
 
+app.post("/news/comment_delete/:id", function (req, res) {
+  console.log('1')
+  Comment.findOne({ "id": req.params.id }, function (err, comment) {
+    console.log('2')
+    if (err || !comment) {
+      console.log('3')
+      return res.status(500).send(err)
+    } else {
+      console.log('4')
+      comment.moderated = true
+      comment.save(function (err) {
+        console.log('5')
+        if (err) {
+          return res.status(500).send(err)
+        } else {
+          res.status(200)
+        }
+      })
+    }
+  })
+});
+
 
 app.post("/news/save", isLoggedIn, function (req, res) {
   var dateTime = require('node-datetime');
