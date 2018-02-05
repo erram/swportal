@@ -4,3 +4,4 @@ require("./news");
 require("./admin");
 require("./events");
 require("./search");
+require("./articles");

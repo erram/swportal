@@ -83,15 +83,18 @@
               <div class="article-comment-list">
 
                 <% if(user) {%>
-                  <form action="/news/commentsave/:<%= newsitem.ID %>" method="POST">
-                    <textarea style="height: 50px;width: 100%;margin: 10px 0px;" id="edit" name="editor_content"></textarea>
-                    <button style="float:right;" class="btn btn-success">Hozzászólok</button>
-                    <div style="clear:both;"></div>
-                  </form>
-
+                  <% if(user.local.can_comment) {%>
+                      <form action="/news/commentsave/<%= newsitem.ID %>" method="POST">
+                        <textarea style="height: 50px;width: 100%;margin: 10px 0px;" id="edit" name="editor_content"></textarea>
+                        <button style="float:right;" class="btn btn-success">Hozzászólok</button>
+                        <div style="clear:both;"></div>
+                      </form>
+                      <% } else {%>
+                        <a class="forum-link" href="#">Le lettél tiltva a kommentelésről!</a>
+                      <% } %>
                   <% } else {%>
                     <a class="forum-link" href="#">ha hozzászólnál, kérlek lépj be!</a>
-                    <% } %>
+                  <% } %>
 
                       <% if(comments) {%>
                         <% for(var i=0; i < comments.length; i++) { %>
@@ -142,12 +145,7 @@
                         }
                       });
                       $(this).parent().parent().remove();
-                      /*
-                      setTimeout(function() {
-                        location.reload();
-                      }, 1000);
-                      */
-                      
+                      location.reload();
                   })
 
 

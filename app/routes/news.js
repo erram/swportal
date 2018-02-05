@@ -147,7 +147,7 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
     content: req.body.editor_content,
     puser: req.user._id,
     pusername: req.user.local.username,
-    newsitem: (req.params.id).substr(1),
+    newsitem: req.params.id,
     date: formatted
   });
 
@@ -155,18 +155,19 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
     if (err) {
       res.send(err)
     } else {
-      News.findOne({ "ID": (req.params.id).substr(1) }, function (err, newsitem) {
-        newsitem.commentecounter += 1;
+      News.findOne({ "ID": req.params.id }, function (err, newsitem) {
+        console.log(newsitem);
+        newsitem.commentcounter += 1;
         newsitem.save(function (err) {
           if (err) {
-            console.log('news:'+req.params.id+' '+'failed to increment counter!');
+            console.log('news:'+req.params.id+' '+'failed to increment counter!'+ err);
             return res.status(500).send(err)
           } else {
             console.log('news:'+req.params.id+' '+'incremented counter!')
           }
         })
       });
-      res.redirect("/news/item/" + (req.params.id).substr(1))
+      res.redirect("/news/item/" + req.params.id)
     }
   })
 });

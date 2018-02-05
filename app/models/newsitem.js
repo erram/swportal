@@ -13,7 +13,7 @@ var newsitemdSchema = mongoose.Schema({
     SzerzőID: Schema.Types.ObjectId,
     Publikálva: Boolean,
     Kategória: String,
-    commentecounter: Number,
+    commentcounter: Number,
     coverimage: String
 });
 

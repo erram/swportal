@@ -31,7 +31,8 @@ td.fc-today {
     color: #FFF!important;
     font-size: 12px!important;
     font-weight: 500!important;
-    padding: 5px 0px!important;
+	padding: 5px 0px 5px 3px !important;
+	border-left: 4px solid #0589c4
 }
 
 .fc {

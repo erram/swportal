@@ -63,4 +63,23 @@ app.post("/admin/user/updatestatus", function (req, res) {
       }
     })
   })
+
+  app.post("/admin/user/updatecomment", function (req, res) { 
+    User.findOne({ "local.email": req.body.userEmail }, function (err, user) {
+      user.local.can_comment = req.body.status
+      if (user) {
+        user.save(function (err) {
+          if (err)
+            console.log(user.local.email + ' failed!')
+          else
+            console.log(user.local + ' updated!')
+            return res.status(200).send("OK")
+            
+        })
+      } else {
+        console.log(err)
+        res.send(err)
+      }
+    })
+  })
   

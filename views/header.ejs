@@ -4,8 +4,8 @@
             <nav>
                 <ul>
                     <li><a href="/">Főoldal</a></li>
-                    <li class="dd"><a href="#">Cikkek</a></li>
-                    <li class="dd"><a href="#">Kiegészítők</a>
+                    <li class="dd"><a href="/articles">Cikkek</a></li>
+                    <li class="dd"><a href="/events">Versenynaptár</a><!--
                         <ul class="dropdown">
                             <li><a href="">Drop Menu 1</a></li>
                             <li><a href="">Drop Menu 2</a></li>
@@ -14,15 +14,18 @@
                             <li><a href="">Drop Menu 3</a></li>
                             <li><a href="">Drop Menu 4</a></li>
                         </ul>
+                        -->
                     </li>
-                    <li class="dd"><a href="#">Lapkereső</a>
+                    <li class="dd"><a href="/search">Lapkereső</a><!--
                         <ul class="dropdown">
                             <li><a href="">Drop Menu 1</a></li>
                             <li><a href="">Drop Menu 2</a></li>
                             
                         </ul>
+                        -->
                     </li>
                     <li><a href="http://www.deltavision.hu/kartyajatek/swsorsok/">Webshop</a></li>
+                    <li><a href="/contacts">Elérhetőségek</a></li>
                 </ul>
             </nav>
             <div class="mobile-nav">
@@ -36,7 +39,7 @@
             <% if(user) {%>
                 <table>
                     <tr>
-                        <td>Hello: <%= user.local.username%></td>
+                        <td><i class="fa fa-user"> </i> <%= user.local.username%></td>
                         <td class="spacer">|</td>
                         <td><a href="/logout">Kijelentkezés</a></td>
                     </tr>

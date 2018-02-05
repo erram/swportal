@@ -5,10 +5,12 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="style/app.css">
+    <link rel="stylesheet" href="style/datetime.css">
     <script src="../jquery/dist/jquery.min.js"></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../js/datetime.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
@@ -62,6 +64,7 @@
                     <th>Email</th>
                     <th>Username</th>
                     <th>Role</th>
+                    <th style="text-align:center">Kommentálhat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,6 +81,12 @@
                             </select>
                             <span id="user-role"><%= users[i].local.role %></span>
                         </td>    
+                        <td style="text-align:center">
+                            <div class="commentCheck">
+                                <input type="checkbox" name="can_comment" value="">
+                                <label style="display:none" class="commentlabel"><%= users[i].local.can_comment %></label>
+                            </div>
+                        </td>
                     </tr>
                     <% } %>    
                 </tbody>
@@ -175,8 +184,12 @@
         <script>
         $(document).ready(function() {
             $( function() {
-                $( "#datepickerstart" ).datepicker();
-                $( "#datepickerend" ).datepicker();
+                $( "#datepickerstart" ).datetimepicker({
+                    timeFormat: "hh:mm tt"
+                });
+                $( "#datepickerend" ).datetimepicker({
+                    timeFormat: "hh:mm tt"
+                });
             } );
             $('#myModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')
@@ -192,6 +205,46 @@
                     }
                 })
             };
+
+            var commentChecks = $(".commentCheck");
+
+            for(var i = 0; i < commentChecks.length; i++){
+                if ($(commentChecks[i]).find("label").text()=='true') {
+                    $(commentChecks[i]).find("input").attr('checked', true);
+                    $(commentChecks[i]).find("input").attr('value', true);
+                }
+            }
+
+            $(".commentCheck").find("input").click(function() {
+                var user = $(this).closest('tr').find('.userEmail').html()
+                if($(this).attr('checked') == 'checked'){
+                    $(this).attr('checked', false);
+                    setCommentAbility(false,user);
+                } else {
+                    $(this).attr('checked', true);
+                    setCommentAbility(true,user);
+                }
+            })
+
+            function setCommentAbility(type,userEmail) {
+                $.ajax
+                    ({ 
+                        url: '/admin/user/updatecomment',
+                        data: {"userEmail": userEmail,"status":type},
+                        type: 'post',
+                        success: function(data)
+                        {
+                            $('.modal-box2').text("User státusa módosítva " +data).fadeIn(700, function() 
+                            {
+                                setTimeout(function() 
+                                {
+                                    $('.modal-box2').fadeOut();
+                                }, 2000);
+                            });
+                        }
+                    });
+            }
+
             $('#example').DataTable();
             var table = $('#example').DataTable(); 
             table.on( 'draw', function () {

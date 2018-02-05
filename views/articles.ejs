@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style/app.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+        p {
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+    <% include header %>
+    <div id="main-content" class="container">
+
+        <div class="hero-rotator">
+            <a href="#"><img src="http://mk.deltavision.hu/wp-content/uploads/2017/05/erioni_ejszakak_banner.jpg" /></a>
+            <a href="#"><img src="http://mk.deltavision.hu/wp-content/uploads/2013/07/magus-kartya-fejlec.jpg" /></a>
+        </div>
+
+        <div class="article-container">
+
+            <% for(var i=0; i < newsitems.length; i++) { %>
+                <div class="article small">
+                    <div class="image-content">
+                        <img src='/uploaded_images/<%=newsitems[i].coverimage%>'>
+                    </div>
+                    <div class="text-content">
+                        <div class="title-content">
+                            <div class="date">
+                                <span class="day"><%= moment(newsitems[i].Dátum, "MM-DD-YYYY").date() %></span>
+                                <span class="mo-ye"><%= moment(newsitems[i].Dátum).subtract(0, "month").startOf("month").format('MMM') %> <%= moment(newsitems[i].Dátum).year() %></span>
+                            </div>
+                            <div class="title">
+                                <h2><a href='/news/item/<%= newsitems[i].ID %>'><%= newsitems[i].Cím %></a></h2>
+                                <span class="publisher"><%= newsitems[i].Szerző %></span>
+                                <span class="category"><%= newsitems[i].Kategória %></span>
+                                <% if(newsitems[i].commentecounter) { %>
+                                    <span class="comments"><%= newsitems[i].commentecounter %></span>
+                                <% } %> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %> 
+        </div>
+    </div>
+
+    <% include footer %>
+<script src="js/app-min.js"></script>
+</body>
+</html>

@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
         email        : String,
         password     : String,
         role         : {type: String, default: "User"},
-        username     : String
+        username     : String,
+        can_comment  : {type: Boolean, default: true},
     },
     facebook         : {
         id           : String,
@@ -17,7 +18,8 @@ var userSchema = mongoose.Schema({
         name         : String,
         email        : String,
         role         : {type: String, default: "User"},
-        username     : String
+        username     : String,
+        can_comment  : {type: Boolean, default: true},
     },
     google           : {
         id           : String,
@@ -25,7 +27,8 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String,
         role         : {type: String, default: "User"},
-        username     : String
+        username     : String,
+        can_comment  : {type: Boolean, default: true},
     }
 
 });
