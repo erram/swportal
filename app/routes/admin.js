@@ -6,11 +6,11 @@ var Card = require("../models/card")
 var User = require("../models/user")
 var Events = require("../models/events")
 
-app.get("/admin", isLoggedIn, isAdmin, function(req, res) {
+app.get("/admin", isLoggedIn, isAdmin, function (req, res) {
   var moment = require("moment")
-  User.find({}, function(err, users){
-    News.find({}, function(err, news) {
-      Events.find({}, function(err, events) {
+  User.find({}, function (err, users) {
+    News.find({}, function (err, news) {
+      Events.find({}, function (err, events) {
         if (err) {
           res.send(err)
         } else {
@@ -20,7 +20,7 @@ app.get("/admin", isLoggedIn, isAdmin, function(req, res) {
             moment: moment,
             users: users,
             events: events,
-            user: req.body.user
+            user: req.user
           })
         }
       })
@@ -37,7 +37,7 @@ app.post("/admin/news/updatestatus", function (req, res) {
           console.log(newsitem._id + ' failed!')
         else
           return res.status(200).send("OK")
-          console.log(newsitem._id + ' updated!')
+        console.log(newsitem._id + ' updated!')
       })
     } else {
       console.log(err)
@@ -46,40 +46,55 @@ app.post("/admin/news/updatestatus", function (req, res) {
   })
 })
 
-app.post("/admin/user/updatestatus", function (req, res) { 
-    User.findOne({ "local.email": req.body.userEmail }, function (err, user) {
-      user.local.role = req.body.status
-      if (user) {
-        user.save(function (err) {
-          if (err)
-            console.log(user.local.email + ' failed!')
-          else
-            return res.status(200).send("OK")
-            console.log(user.local.email + ' updated!')
-        })
-      } else {
-        console.log(err)
-        res.send(err)
-      }
-    })
+app.post("/admin/user/updatestatus", function (req, res) {
+  User.findOne({ "local.email": req.body.userEmail }, function (err, user) {
+    user.local.role = req.body.status
+    if (user) {
+      user.save(function (err) {
+        if (err)
+          console.log(user.local.email + ' failed!')
+        else
+          return res.status(200).send("OK")
+        console.log(user.local.email + ' updated!')
+      })
+    } else {
+      console.log(err)
+      res.send(err)
+    }
   })
+})
 
-  app.post("/admin/user/updatecomment", function (req, res) { 
-    User.findOne({ "local.email": req.body.userEmail }, function (err, user) {
-      user.local.can_comment = req.body.status
-      if (user) {
-        user.save(function (err) {
-          if (err)
-            console.log(user.local.email + ' failed!')
-          else
-            console.log(user.local + ' updated!')
-            return res.status(200).send("OK")
-            
-        })
-      } else {
-        console.log(err)
-        res.send(err)
-      }
-    })
+app.post("/admin/user/updatecomment", function (req, res) {
+  User.findOne({ "local.email": req.body.userEmail }, function (err, user) {
+    user.local.can_comment = req.body.status
+    if (user) {
+      user.save(function (err) {
+        if (err)
+          console.log(user.local.email + ' failed!')
+        else
+          console.log(user.local + ' updated!')
+        return res.status(200).send("OK")
+
+      })
+    } else {
+      console.log(err)
+      res.send(err)
+    }
   })
-  
+})
+
+app.post("/admin/event/delete", function (req, res) {
+  console.log(req.body.event)
+  Events.findOneAndRemove({ "id": req.body.event }, function (err, event) {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      var response = {
+        message: "Event successfully deleted",
+      };
+      res.status(200).send(response);
+    }
+
+  })
+})
+

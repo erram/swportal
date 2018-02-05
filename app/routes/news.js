@@ -9,8 +9,8 @@ var multer = require("multer");
 
 
 //Hír szerkeztő
-app.get("/news", isLoggedIn, function (req, res) {
-  res.render("news.ejs", {user:req.body.user})
+app.get("/news", isLoggedIn, isAdmin, function (req, res) {
+  res.render("news.ejs", {user:req.user})
 });
 
 app.post("/news/update/:id", isLoggedIn, function (req, res) {

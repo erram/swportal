@@ -44,10 +44,23 @@
                         <td><a href="/logout">Kijelentkezés</a></td>
                     </tr>
                 </table>
+                <div class="usermenu">
+                    <ul>
+                        <li><a href="/profile">Profilom</a></li>
+                        <% if(user.local.role == "Admin" ) {%>
+                        <li><a href="/admin">Admin</a></li>
+                        <% } %>
+                        <% if(user.local.role == "Admin" || user.local.role == "Newswriter" ) {%>
+                            <li><a href="/news">News</a></li>
+                        <% } %>
+                    </ul>
+                </div>
             <% } else {%>
+                <table>
                 <td><a href="/login">Bejelentkezés</a></td>
                     <td class="spacer">|</td>
                 <td><a href="/Signup">Regisztráció</a></td>
+            </table>
             <% } %>
             </div>
             
@@ -85,6 +98,16 @@
                 $("#suggesstion-box").empty(); 
                 $("#suggesstion-box").hide();
             })*/
+
+            $(".userhandle").hover(
+                function() {
+                    $('.usermenu').slideDown('fast');
+                },
+                function() {
+                    $('.usermenu').slideUp('fast');
+                }
+            );
+
         });
         </script>
     </header>

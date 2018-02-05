@@ -22,6 +22,11 @@
         }
         .modal-box {display:none}
         .modal-box2 {display:none}
+        .eventDelete {
+            color: red;
+            text-align: center;
+            vertical-align: middle !important;
+        }
 </style>
 
 <body>
@@ -101,18 +106,21 @@
                             <th>Esemény neve</th>
                             <th>Kezdeti dátum</th>
                             <th>Vég Dátum</th>
+                            <th>Törlés</th>
                             </tr>
                         </thead>
                         <tbody>
                         <% for(var i=0; i < events.length; i++) { %>  
-                    <tr>
+                        <tr id="<%= events[i].id %>">
                             <td ><a href="<%= events[i].url%>"><%= events[i].title %></a></td>
                             <td><%= events[i].start %></td>
-                            <td><%= events[i].end %></td>   
+                            <td><%= events[i].end %></td>  
+                            <td class="eventDelete"><i class="fa fa-minus-circle"></i></td>
                         </tr>
                 <% } %>
             </tbody>
         </table>
+    </div>
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -183,17 +191,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
         <script>
         $(document).ready(function() {
-            $( function() {
+            $(function() {
                 $( "#datepickerstart" ).datetimepicker({
                     timeFormat: "hh:mm tt"
                 });
                 $( "#datepickerend" ).datetimepicker({
                     timeFormat: "hh:mm tt"
                 });
-            } );
+            });
             $('#myModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')
-                })
+            })
              function statechange(){
                     var togglelista = $(".togglef");
                     togglelista.each(function(){
@@ -207,16 +215,18 @@
             };
 
             var commentChecks = $(".commentCheck");
+            var eventDeletebuttons = $(".eventDelete");
 
             for(var i = 0; i < commentChecks.length; i++){
                 if ($(commentChecks[i]).find("label").text()=='true') {
                     $(commentChecks[i]).find("input").attr('checked', true);
                     $(commentChecks[i]).find("input").attr('value', true);
-                }
-            }
+                };
+            };
 
+            //Komment tiltás
             $(".commentCheck").find("input").click(function() {
-                var user = $(this).closest('tr').find('.userEmail').html()
+                var user = $(this).closest('tr').find('.userEmail').html();
                 if($(this).attr('checked') == 'checked'){
                     $(this).attr('checked', false);
                     setCommentAbility(false,user);
@@ -224,7 +234,7 @@
                     $(this).attr('checked', true);
                     setCommentAbility(true,user);
                 }
-            })
+            });
 
             function setCommentAbility(type,userEmail) {
                 $.ajax
@@ -241,6 +251,25 @@
                                     $('.modal-box2').fadeOut();
                                 }, 2000);
                             });
+                        }
+                    });
+            };
+
+            //Event törlő esemény
+            $(".eventDelete").click(function(){
+                var event = $(this).closest('tr').attr('id');
+                deleteEvent(event);
+            });
+
+            function deleteEvent(event) {
+                $.ajax
+                    ({ 
+                        url: '/admin/event/delete',
+                        data: {"event":event},
+                        type: 'post',
+                        success: function(data)
+                        {
+                            location.reload();
                         }
                     });
             }
@@ -264,6 +293,7 @@
                     } else if(status == "false") {
                         $(this).next('span').html("true");
                         status = "true";
+                    }
                     
                     $.ajax
                     ({ 
@@ -330,6 +360,9 @@
             }
 
             update2();
+            $('#example3').DataTable();
+
+            
 
          
         });

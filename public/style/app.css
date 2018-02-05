@@ -123,9 +123,22 @@ h5 {
     .site-navigation .mobile-nav {
       display: none; }
     .site-navigation .userhandle {
-      padding: 11px 5px !important; }
+      padding: 14px 5px 14px 5px !important;
+      position: relative;
+      cursor: pointer; }
       .site-navigation .userhandle a {
         font-size: 12px; }
+    .site-navigation .usermenu {
+      background-color: white;
+      position: absolute;
+      top: 40px;
+      box-shadow: 1px 1px 1px black;
+      display: none; }
+      .site-navigation .usermenu ul {
+        padding: 5px; }
+        .site-navigation .usermenu ul li {
+          list-style: none;
+          padding: 5px; }
     .site-navigation nav ul {
       text-align: center;
       float: left; }
@@ -560,7 +573,9 @@ h5 {
       text-align: left;
       width: 30%; }
     .article-container .article .text-content {
-      width: 70%; } }
+      width: 70%; }
+    .article-container .article .day {
+      display: block !important; } }
   .article-container .article .title-content {
     position: relative;
     margin-bottom: 10px; }
@@ -735,7 +750,7 @@ h5 {
   text-align: left; }
   .admin .panel-heading {
     margin-bottom: 10px; }
-  .admin #example_wrapper .row, .admin #example2_wrapper .row {
+  .admin #example_wrapper .row, .admin #example2_wrapper .row, .admin #example3_wrapper .row {
     margin: 0px; }
 
 .card-content div {
