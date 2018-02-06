@@ -6,6 +6,7 @@ app.get("/events", function(req, res) {
   Event.find({}, '-_id', function(err, itms) {
     if (err) {
       console.log(err)
+      res.status(500).send(err)
     } else {
       console.log(itms)
       res.render("events.ejs", { itms: JSON.stringify(itms), moment: moment, user: req.user })
@@ -25,7 +26,7 @@ app.post("/events/add", function(req, res) {
 
     event.save(function (err) {
       if (err) {
-        res.send(err)
+        res.status(500).send(err)
       } else {
         res.redirect("/admin")
       }
@@ -36,6 +37,7 @@ app.post("/events/participate/:name/:newsid", function(req, res) {
   Event.findOne({"url":req.params.newsid}, function(err, itm) {
     if (err) {
       console.log(err)
+      res.status(500).send(err)
     } else {
       if (itm) {
 

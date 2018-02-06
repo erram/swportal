@@ -12,7 +12,7 @@ app.get("/admin", isLoggedIn, isAdmin, function (req, res) {
     News.find({}, function (err, news) {
       Events.find({}, function (err, events) {
         if (err) {
-          res.send(err)
+          res.status(500).send(err)
         } else {
           res.render("admin/index.ejs", {
             news: news,
@@ -33,15 +33,17 @@ app.post("/admin/news/updatestatus", function (req, res) {
     newsitem.Publikálva = req.body.status
     if (newsitem) {
       newsitem.save(function (err) {
-        if (err)
+        if (err) {
           console.log(newsitem._id + ' failed!')
-        else
+          res.status(500).send(err)
+        } else {
+          console.log(newsitem._id + ' updated!')
           return res.status(200).send("OK")
-        console.log(newsitem._id + ' updated!')
+        }         
       })
     } else {
       console.log(err)
-      res.send(err)
+      res.status(500).send(err)
     }
   })
 })
@@ -51,15 +53,17 @@ app.post("/admin/user/updatestatus", function (req, res) {
     user.local.role = req.body.status
     if (user) {
       user.save(function (err) {
-        if (err)
+        if (err) {
           console.log(user.local.email + ' failed!')
-        else
+          res.status(500).send(err)
+        } else {
+          console.log(user.local.email + ' updated!')
           return res.status(200).send("OK")
-        console.log(user.local.email + ' updated!')
+        }
       })
     } else {
       console.log(err)
-      res.send(err)
+      res.status(500).send(err)
     }
   })
 })
@@ -69,16 +73,17 @@ app.post("/admin/user/updatecomment", function (req, res) {
     user.local.can_comment = req.body.status
     if (user) {
       user.save(function (err) {
-        if (err)
+        if (err) {
           console.log(user.local.email + ' failed!')
-        else
+          res.status(500).send(err)
+        } else {
           console.log(user.local + ' updated!')
-        return res.status(200).send("OK")
-
+          return res.status(200).send("OK")
+        }
       })
     } else {
       console.log(err)
-      res.send(err)
+      res.status(500).send(err)
     }
   })
 })
