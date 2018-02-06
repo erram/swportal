@@ -44,6 +44,7 @@ app.post("/news/update/:id", isLoggedIn, function (req, res) {
 
 app.get("/news/item/:id", function (req, res) {
   var moment = require("moment");
+  var trunc = require("truncate");
   News.findOne({ "ID": req.params.id }, function (err, newsitem) {
     Comment.find({ "newsitem": req.params.id }, function (err, comments) {
       if (err || !newsitem) {
@@ -59,7 +60,8 @@ app.get("/news/item/:id", function (req, res) {
               user: req.user, 
               comments: comments, 
               moment: moment,
-              event: itm
+              event: itm,
+              trunc: trunc
              })
             }
           })  
@@ -69,7 +71,8 @@ app.get("/news/item/:id", function (req, res) {
             user: req.user, 
             comments: comments, 
             moment: moment,
-            event: null
+            event: null,
+            trunc: trunc
            })
         }
 

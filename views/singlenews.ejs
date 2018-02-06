@@ -31,33 +31,37 @@
 
             <div id="main-content" class="container">
               <div class="article-box">
-                <div class="date-box">
-                  <span class="day">30</span>
-                  <span class="mo-ye">Nov 2017</span>
-                </div>
 
-                <div class="article-head">
-                  <h2>
-                    <%= newsitem.Cím %>
-                  </h2>
-
-                  <div class="article-details">
-                    <span class="publisher">
-                      <a href="">
+                <div class="blog-header">
+                <img class="blog-visual" src="/uploaded_images/<%=newsitem.coverimage%>"/>
+                <div class="blog-head">
+                  <div class="blog-meta">
+                    <span class="meta-date">
+                      <span class="day"><%= moment(newsitem.Dátum, "MM-DD-YYYY").date() %></span>
+                      <span class="mo-ye"><%= moment(newsitem.Dátum).subtract(0, "month").startOf("month").format('MMM') %> <%= moment(newsitem.Dátum).year() %></span>
+                    </span>
+                    <span class="visible-desktop" style="padding: 5px;">|</span>
+                    <span class="meta-productline">
+                      <a href="/en/products/star-wars-legion/">
                         <%= newsitem.Szerző %>
                       </a>
-                    </span>
-                    <span class="category">
-                      <a href="">
-                        <%= newsitem.Kategória %>
-                      </a>
-                    </span>
-                    <span class="tags">
-                      <a href="">tag1</a>,
-                      <a href="">lorem ipsum tag2</a>,
-                      <a href="">lorem tag3</a>,</span>
+                      </span>
+                  </div>
+                      <div class="blog-titlelead-container">
+                      <div class="blog-titlelead">
+                      <h1><%= newsitem.Cím %></h1>
+                      <div class="blog-lead">
+                          <%- trunc(newsitem.Tartalom,300) %>
+                      </div>
+                    </div>
                   </div>
                 </div>
+              </div>
+
+
+
+
+
                 <div class="article-body">
                   <%- newsitem.Tartalom %>
                     <% if (newsitem.Kategória == "Esemény" && user) {%>
