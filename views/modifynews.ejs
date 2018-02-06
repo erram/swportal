@@ -10,7 +10,7 @@
 
     <!-- Include Froala Editor styles -->
     <link rel="stylesheet" href="../../froala-wysiwyg-editor/css/froala_editor.min.css" />
-    <link rel="stylesheet" href="froala-wysiwyg-editor/css/froala_style.min.css" />
+    <link rel="stylesheet" href="../../froala-wysiwyg-editor/css/froala_style.min.css" />
 
     <!-- Include Froala Editor Plugins styles -->
     <link rel="stylesheet" href="../../froala-wysiwyg-editor/css/plugins/char_counter.css">
@@ -53,6 +53,20 @@
     <script src="../../froala-wysiwyg-editor/js/plugins/table.min.js"></script>
     <script src="../../froala-wysiwyg-editor/js/plugins/video.min.js"></script>
     <!-- End Froala -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <!-- End Froala -->
+    <style>
+        .imgUpload img{
+            width:100%;
+        }
+
+        .imgUpload label {
+            display:block;
+        }
+        .status {
+            display: block;
+        }
+    </style>
 
 </head>
 
@@ -64,15 +78,34 @@
 
             <div class="row">
                 <div class="sample">
+                    <table class="imgUpload">
+                        <tr>
+                            <td style="width:20%"><label>Jelenlegi kép</label><br/><span id="image"><img src="../../uploaded_images/<%= newsitem.coverimage %>"/></span></td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <label>Új kép feltöltés</label><br/>
+                                <form class="uploadImage" enctype="multipart/form-data" action="/news/cover" method="POST">
+                                    <input type="file" name="userphoto" id="userphoto">
+                                    <input class="btn btn-success" id="submitbtn" type="submit" name="submit" value="Feltöltés">
+                                    <span id="status"></span>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
                     <form action="/news/update/<%= newsitem.ID %>" method="POST">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hír címe</label>
                             <input class="form-control" id="title" name="editor_title" placeholder="<%= newsitem.Cím %>"  value="<%= newsitem.Cím %>"></input>
+                            <input style="display:none" id="hiddenimagename" name="imagename" value="alap.jpg">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Kategória</label>
                             <select name="editor_category" class="form-control" id="exampleFormControlSelect1">
-                            <option value="Valamilyen kategória"><%= newsitem.Kategória %></option>
+                                <option value="Valamilyen kategória"><%= newsitem.Kategória %></option>
+                                <option value="Hír">Hír</option>
+                                <option value="Esemény">Esemény</option>
                             </select>
                         </div>
                         
@@ -84,6 +117,25 @@
                 
                 <script>
                     $(function () {
+                        $('.uploadImage').submit(function () {
+                                $("#status").empty().text("File is uploading...");
+
+                                $(this).ajaxSubmit({
+
+                                    error: function (xhr) {
+                                        status('Error: ' + xhr.status);
+                                    },
+
+                                    success: function (response) {
+                                        console.log(response)
+                                        $("#image").empty().append("<img src='../../uploaded_images/"+response+"' />");
+                                         $("#status").empty()
+                                        $("#hiddenimagename").val(response);
+                                    }
+                                });
+
+                                return false;
+                            });
                         var titletext = "inittext";
                         $('#edit').froalaEditor({
                             imageUploadURL: '/news/uploadimage',

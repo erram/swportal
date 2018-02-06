@@ -24,6 +24,7 @@ app.post("/news/update/:id", isLoggedIn, function (req, res) {
       newsitem.Dátum = formatted;
       newsitem.Tartalom = req.body.editor_content;
       newsitem.Kategória = req.body.editor_category;
+      newsitem.coverimage = req.body.imagename;
 
       newsitem.save(function (err) {
         if (err) {
