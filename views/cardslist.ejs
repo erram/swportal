@@ -15,9 +15,9 @@
     <% include header %>
     <div id="main-content" class="container">
 
-        <div class="article-container">
-
+        <div class="article-container">           
             <% for(var i=0; i < cards.length; i++) { %>
+
                 <div class="row card container">
                     <div class="col-md-4 cardimage">
                         <img src="../../../card_pictures/<%= cards[i].Kiadás %>/<%= cards[i].Sorszám %>.jpg">
@@ -37,7 +37,18 @@
                                 </div>        					
                                 <div class="card-info">
                                     <span class="card-type"><b><%= cards[i].Típus%></b>.</span>
-                                    <span class="card-props"><span class="card-props">Pontérték: <%= cards[i].Pontérték%>. Életerő: <%= cards[i].Életerő %>.</span></span>
+                                        <span class="card-props"><span class="card-props">
+                                        <% if(cards[i].Pontérték) {%>
+                                            Pontérték: <%= cards[i].Pontérték %>.
+                                        <% } %> 
+                                        <% if(cards[i].Életerő) {%>
+                                            Életerő: <%= cards[i].Életerő %>.
+                                        <% } %> 
+                                        <% if(cards[i].Költség) {%>
+                                            Költség: <%= cards[i].Költség %>.
+                                        <% } %> 
+                                        </span>
+                                    </span>
                                 </div>
 
                                 <div class="card-text border-blue">
@@ -62,6 +73,6 @@
     </div>
 
     <% include footer %>
-<script src="js/app-min.js"></script>
+<script src="../js/app-min.js"></script>
 </body>
 </html>

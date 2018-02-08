@@ -11,6 +11,7 @@ var cardSchema = mongoose.Schema({
     Típus: String,
     Frakció: String,
     Életerő: Number,
+    Költség: Number,
     Pontérték: String,
     Oldal: String,
     Szövegmező: String,

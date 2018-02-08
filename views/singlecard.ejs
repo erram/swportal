@@ -30,7 +30,17 @@
                             </div>        					
                             <div class="card-info">
                                 <span class="card-type"><b><%= card.Típus%></b>.</span>
-                                <span class="card-props"><span class="card-props">Pontérték: <%= card.Pontérték%>. Életerő: <%= card.Életerő %>.</span></span>
+                                <span class="card-props"><span class="card-props">
+                                <% if(card.Pontérték) {%>
+                                            Pontérték: <%= card.Pontérték %>.
+                                        <% } %> 
+                                        <% if(card.Életerő) {%>
+                                            Életerő: <%= card.Pontérték %>.
+                                        <% } %> 
+                                        <% if(card.Költség) {%>
+                                            Költség: <%= card.Költség %>.
+                                        <% } %> 
+                                </span></span>
                             </div>
 
                             <div class="card-text border-blue">
@@ -51,7 +61,7 @@
 
         </div>
         <% include footer %>
-    <script src="../../js/app-min.js"></script>
+    <script src="../../../js/app-min.js"></script>
 </body>
 
 </html>

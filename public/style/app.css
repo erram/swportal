@@ -790,6 +790,14 @@ h5 {
   .Sárga .card-text {
     border-color: #ffba37 !important; }
 
+.Piros {
+  border: 1px solid red; }
+  .Piros .panel-heading {
+    background-color: red !important;
+    color: white !important; }
+  .Piros .card-text {
+    border-color: red !important; }
+
 .cardimage img {
   width: 100%; }
 

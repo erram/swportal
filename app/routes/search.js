@@ -131,6 +131,26 @@ app.post("/search/advanced", function(req, res) {
       querryarray.push(temp);
     }
 
+    if(data.lifeMinMax[0]) {
+      var temp = {"Életerő":{ $gte: data.lifeMinMax[0] }}
+      querryarray.push(temp);
+    }
+    if(data.lifeMinMax[1]) {
+      var temp = {"Életerő":{ $lte: data.lifeMinMax[1] }}
+      querryarray.push(temp);
+    }
+
+    if(data.forceMinMax[0]) {
+      console.log(data.forceMinMax[0])
+      var temp = {"Költség":{ $gte: Number(data.forceMinMax[0]) }}
+      console.log(temp)
+      querryarray.push(temp);
+    }
+    if(data.forceMinMax[1]) {
+      var temp = {"Költség":{ $lte: Number(data.forceMinMax[1]) }}
+      querryarray.push(temp);
+    }
+
     queryObj.$and = querryarray
 
     console.log(queryObj)

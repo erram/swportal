@@ -48,6 +48,18 @@
     }
 }
 
+.Piros {
+    border: 1px solid red;
+    .panel-heading {
+        background-color: red !important;
+        color: white !important;
+    }
+    
+    .card-text {
+        border-color: red !important;
+    }
+}
+
 
 .cardimage img {
     width: 100%;
