@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../style/app.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+        p {
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+    <% include header %>
+    <div id="main-content" class="container">
+
+        <div class="article-container">
+
+            <% for(var i=0; i < cards.length; i++) { %>
+                <div class="row card container">
+                    <div class="col-md-4 cardimage">
+                        <img src="../../../card_pictures/<%= cards[i].Kiadás %>/<%= cards[i].Sorszám %>.jpg">
+                    </div>
+                    <div class="col-md-8 cardinfo">
+                        <div class="panel panel-default <%= cards[i].Frakció%>">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <span class="icon-unique"></span><%= cards[i].Név %><span class="card-subtitle"> - <%= cards[i].Szinesítő %></span>
+                                </h3>
+                            </div>
+                            <div class="panel-body card-content">
+                                <div class="card-faction">
+                                    <span class="card-affiliation"><%= cards[i].Oldal%></span>.
+                                    <span class="card-faction"><%= cards[i].Frakció%></span>.	
+                                    <span class="card-rarity"><%= cards[i].Ritkaság%></span>.
+                                </div>        					
+                                <div class="card-info">
+                                    <span class="card-type"><b><%= cards[i].Típus%></b>.</span>
+                                    <span class="card-props"><span class="card-props">Pontérték: <%= cards[i].Pontérték%>. Életerő: <%= cards[i].Életerő %>.</span></span>
+                                </div>
+
+                                <div class="card-text border-blue">
+                                    <p><%= cards[i].Szövegmező %></p>
+                                </div>                            
+                                <div class="card-flavor small">
+                                    <%= cards[i].Idézet %>
+                                </div>        					
+                                <div class="card-illustrator">
+                                    <span class="fa fa-paint-brush text-muted"></span>
+                                    <%= cards[i].Illusztrátor %>
+                                </div>
+                                <div class="card-set"><span class="icon-set-AW"></span> <%= cards[i].Kiadás%> #<%= cards[i].Sorszám%>.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+
+            <% } %> 
+        </div>
+    </div>
+
+    <% include footer %>
+<script src="js/app-min.js"></script>
+</body>
+</html>
