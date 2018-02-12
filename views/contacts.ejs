@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style/app.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<style>
+    .btn {
+        font-size: 12px;
+    }
+</style>
+
+<body>
+    <% include header %>
+        <div id="main-content" class="container">
+            <div class="article-container">
+                <div class="col-sm-12">
+                    <div class="col-main">
+                        <p>
+                            <strong>A Delta Vision kiadó elérhetőségei</strong>
+                        </p>
+                        <table style="margin-left: 5px;" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 150px;">A kiadó postacíme:</td>
+                                    <td>1092 Budapest Ferenc körút 40.</td>
+                                </tr>
+                                <tr>
+                                    <td>Telefonszám:</td>
+                                    <td>+36
+                                        <span>70/322-3093</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail elérhetőség:</td>
+                                    <td>
+                                        <span>info@deltavision.hu</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <strong>
+                                <strong>
+                                    <br>Budapesti központi boltunk elérhetőségei</strong>
+                            </strong>
+                        </p>
+                        <table style="margin-left: 5px;" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 150px;">Boltunk postacíme:</td>
+                                    <td>1092 Budapest Ferenc körút 40.</td>
+                                </tr>
+                                <tr>
+                                    <td>Telefonszám:</td>
+                                    <td>+3670/322-3093</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail elérhetőség:</td>
+                                    <td>&nbsp;bolt@deltavision.hu</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <strong>
+                                <strong>
+                                    <br>Weblappal kapcsolatos észrevételek, hibajelentés</strong>
+                            </strong>
+                        </p>
+                        <p>Ha szeretnél te is cikkeket írni, szívesen fogadjuk őket, nem kell mást tenned csak vedd fel velünk a kapcsolatot!</p>
+                        <table style="margin-left: 5px;" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 150px;">Bolt:</td>
+                                    <td>bolt@deltavision.hu</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <strong>
+                                <strong>
+                                    <br>
+                                </strong>
+                            </strong>
+                        </p>
+
+                    </div>
+                    <div class="map">
+                        <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD9MV9B-mJDjrlUBZsMwStonICPKkqv1lI'></script><div style='overflow:hidden;height:400px;width:100%;'><div id='gmap_canvas' style='height:400px;width:100%;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://embed-map.org/'>add bing map to website</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=675ee6a216c44a9a2eb9910c8b0a7c75caff5d67'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:17,center:new google.maps.LatLng(47.4848639,19.06929779999996),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(47.4848639,19.06929779999996)});infowindow = new google.maps.InfoWindow({content:'<strong>Delta Vision</strong><br>Ferenc körút 40<br> Budapest<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <% include footer %>
+            <script src="js/app-min.js"></script>
+</body>
+
+</html>

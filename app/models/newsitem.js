@@ -9,6 +9,7 @@ var newsitemdSchema = mongoose.Schema({
     Cím: String,
     Dátum: Date,
     Tartalom: String,
+    Summary: String,
     Szerző: String,
     SzerzőID: Schema.Types.ObjectId,
     Publikálva: Boolean,

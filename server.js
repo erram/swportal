@@ -61,6 +61,10 @@ app.get("/", function(req, res) {
   
 });
 
+app.get("/contacts", function(req, res){
+    res.render("contacts.ejs", {user: req.user})
+})
+
 require("./app/routes");
 app.listen(port);
 

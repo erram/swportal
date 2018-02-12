@@ -23,6 +23,7 @@ app.post("/news/update/:id", isLoggedIn, function (req, res) {
       newsitem.Cím = req.body.editor_title;
       newsitem.Dátum = formatted;
       newsitem.Tartalom = req.body.editor_content;
+      Summary: req.body.editor_summary;
       newsitem.Kategória = req.body.editor_category;
       newsitem.coverimage = req.body.imagename;
 
@@ -125,6 +126,7 @@ app.post("/news/save", isLoggedIn, function (req, res) {
     Cím: req.body.editor_title,
     Dátum: formatted,
     Tartalom: req.body.editor_content,
+    Summary: req.body.editor_summary,
     Szerző: req.user.local.username,
     SzerzőID: req.user._id,
     Publikálva: false,

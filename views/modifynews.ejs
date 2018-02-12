@@ -101,6 +101,10 @@
                             <input style="display:none" id="hiddenimagename" name="imagename" value="alap.jpg">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Hír rövid bemutató</label>
+                            <textarea class="form-control" id="title" name="editor_summary"><%= newsitem.Summary %></textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleFormControlSelect1">Kategória</label>
                             <select name="editor_category" class="form-control" id="exampleFormControlSelect1">
                                 <option value="Valamilyen kategória"><%= newsitem.Kategória %></option>
