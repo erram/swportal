@@ -43,8 +43,6 @@ app.post("/search/advanced", function(req, res) {
     var queryObj = {}
     var data = req.body
     var querryarray = []
-
-    console.log(data)
     
     if(data.name) {
       querryarray.push({'Név':new RegExp(data.field, "i")})
@@ -63,7 +61,7 @@ app.post("/search/advanced", function(req, res) {
     }
 
     if(data.subtype) {
-      querryarray.push({'Típus':data.subtype})
+      querryarray.push({'Altípus':data.subtype})
     }
 
     if(data.set) {
