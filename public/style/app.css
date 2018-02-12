@@ -592,6 +592,21 @@ h5 {
         color: #428bca;
         font-size: 18px;
         margin-bottom: 10px; }
+      .article-container .article .title-content .title span {
+        font-size: 11px;
+        margin-right: 5px; }
+        .article-container .article .title-content .title span.publisher:before {
+          font-family: "FontAwesome";
+          content: "\f007";
+          margin-right: 5px; }
+        .article-container .article .title-content .title span.category:before {
+          font-family: "FontAwesome";
+          content: "\f07c";
+          margin-right: 5px; }
+        .article-container .article .title-content .title span.comments:before {
+          font-family: "FontAwesome";
+          content: "\f075";
+          margin-right: 5px; }
     .article-container .article .title-content .date {
       position: absolute;
       right: 0;
@@ -664,21 +679,6 @@ h5 {
         color: #63656e;
         text-align: left;
         font-size: 11px; }
-      .article-box .blog-header .blog-head span {
-        font-size: 11px;
-        margin-right: 5px; }
-        .article-box .blog-header .blog-head span.publisher:before {
-          font-family: "FontAwesome";
-          content: "\f007";
-          margin-right: 5px; }
-        .article-box .blog-header .blog-head span.category:before {
-          font-family: "FontAwesome";
-          content: "\f07c";
-          margin-right: 5px; }
-        .article-box .blog-header .blog-head span.comments:before {
-          font-family: "FontAwesome";
-          content: "\f075";
-          margin-right: 5px; }
       .article-box .blog-header .blog-head h1 {
         color: #343740;
         font-size: 21px;
