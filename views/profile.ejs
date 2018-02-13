@@ -10,6 +10,9 @@
  .btn {
      font-size: 12px;
  }
+ .modal-box2 {
+     display:none;
+ }
 </style>
 <body>
 <% include header %>
@@ -65,7 +68,7 @@
                             <strong>username</strong>: <%= user.local.username %>
                         </p>
                         
-                        <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                        <!-- <a href="/unlink/local" class="btn btn-default">Unlink</a> -->
                     <% } else { %>
                         <a href="/connect/local" class="btn btn-default">Connect Local</a>
                     <% } %>
@@ -97,6 +100,7 @@
 <script>
 $(".torles").click(function(){
     var ID = $(this).attr('id');
+    deleteItem(ID);
 })
 
 function deleteItem(ID) {
@@ -114,6 +118,8 @@ function deleteItem(ID) {
                 $('.modal-box2').fadeOut();
                     }, 2000);
                 });
+                
+                $("#"+ID).parent().parent().remove();
             }
         });
 }

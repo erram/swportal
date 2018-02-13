@@ -48,6 +48,17 @@ app.post("/admin/news/updatestatus", function (req, res) {
   })
 })
 
+app.post("/admin/news/delete", function (req, res) {
+  News.findOneAndRemove({ "ID": req.body.ID }, function (err, newsitem) {
+    if (newsitem) {
+      res.status(200).send('Törölve')
+    } else {
+      console.log(err)
+      res.status(500).send(err)
+    }
+  })
+})
+
 app.post("/admin/user/updatestatus", function (req, res) {
   User.findOne({ "local.email": req.body.userEmail }, function (err, user) {
     user.local.role = req.body.status
