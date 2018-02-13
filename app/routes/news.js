@@ -114,6 +114,30 @@ app.post("/news/comment_delete/:id", function (req, res) {
   })
 });
 
+app.post("/news/participant_delete/", function (req, res) {
+  Event.findOne({"id":req.body.eventid},function(err, event) {
+    if(err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      var temp = event.participants.filter(function(user){
+        return user != req.body.username;
+      })
+
+      event.participants = temp;
+
+      event.save(function (err) {
+        if (err) {
+          res.send(err)
+        } else {
+          res.redirect("/news/item/"+req.body.callback);
+        }
+      })
+    }
+  })
+});
+
+
 
 app.post("/news/save", isLoggedIn, function (req, res) {
   var dateTime = require('node-datetime');

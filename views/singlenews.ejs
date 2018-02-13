@@ -19,6 +19,8 @@
   <% include header %>
     <% if(event) {%>
       <p style="display:none" id="eventhelper"><%- event.participants %></p>
+      <p style="display:none" id="eventhelper3"><%- event.id %></p>
+      <p style="display:none" id="eventhelper4"><%- newsitem.ID %></p>
       <% } %>
 
         <% if(user) {%>
@@ -54,10 +56,6 @@
                 </div>
               </div>
 
-
-
-
-
                 <div class="article-body">
                   <%- newsitem.Tartalom %>
                     <% if (newsitem.Kategória == "Esemény" && user) {%>
@@ -67,6 +65,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary mb-2">Jelentkezem!</button>
                       </form>
+                      <div class="unsub"></div>
                       <% } %>
                         <hr>
                         <% if(event) {%>
@@ -133,9 +132,16 @@
               <script src="../../js/app-min.js"></script>
               <script>
                 $(document).ready(function () {
+                  var images = $(".article-body").find("img")
+                  for(var i= 0; i< images.length; i++) {
+                    var temp = "../../";
+                    var current = $(images[i]).attr("src");
+                    $(images[i]).attr("src",temp+current);
+                  }
+
 
                   $("#delete_comment").click(function () {
-                    var id = $(this).attr('class') 
+                    var id = $(this).attr('class');
                     $.ajax
                       ({
                         url: '/news/comment_delete/'+id,
@@ -147,8 +153,6 @@
                       $(this).parent().parent().remove();
                       location.reload();
                   })
-
-
 
                   var partipForm = $("#participate");
                   var isuserin = false;
@@ -164,9 +168,28 @@
 
                   if (isuserin) {
                     partipForm.hide();
+                    $(".unsub").append("<button id='unsub' class='btn btn-primary mb-2'>Lejelentkezem!</button>")
                   } else {
                     partipForm.show();
+                    $(".unsub").remove();
                   }
+
+
+                  $("#unsub").click(function () {
+                    var username = $("#eventhelper2").text();
+                    var eventid = $("#eventhelper3").text();
+                    var newsid = $("#eventhelper4").text();
+                    $.ajax
+                      ({
+                        url: '/news/participant_delete/',
+                        type: 'post',
+                        data: {"username": username, "eventid":eventid, "callback": newsid},
+                        success: function () {
+                          location.reload();
+                        }
+                      });
+                      location.reload();
+                  })
                 })
               </script>
 </body>
