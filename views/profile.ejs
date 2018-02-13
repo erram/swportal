@@ -16,6 +16,7 @@
     <div id="main-content" class="container">
         <div class="article-container">
             <div class="col-sm-12">
+            <div class="modal-box2 alert alert-success"></div>
                 <div class="well">
                     <h3><span class="fa fa-address-book"></span> Postolt hírek</h3>
 
@@ -95,24 +96,28 @@
 <script src="js/app-min.js"></script>
 <script>
 $(".torles").click(function(){
-    
+    var ID = $(this).attr('id');
 })
-$.ajax
-({ 
-    url: '/admin/user/updatecomment',
-    data: {"userEmail": userEmail,"status":type},
-    type: 'post',
-    success: function(data)
-    {
-        $('.modal-box2').text("User státusa módosítva " +data).fadeIn(700, function() 
-        {
-            setTimeout(function() 
-        {
-        $('.modal-box2').fadeOut();
-            }, 2000);
+
+function deleteItem(ID) {
+    $.ajax
+        ({ 
+            url: '/admin/news/delete',
+            data: {"ID":ID},
+            type: 'post',
+            success: function(data)
+            {
+                $('.modal-box2').text("User státusa módosítva " +data).fadeIn(700, function() 
+                {
+                    setTimeout(function() 
+                {
+                $('.modal-box2').fadeOut();
+                    }, 2000);
+                });
+            }
         });
-    }
-});
+}
+
 
 </script>
 </body>
