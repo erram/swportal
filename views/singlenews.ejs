@@ -18,15 +18,11 @@
 <body>
   <% include header %>
     <% if(event) {%>
-      <p style="display:none" id="eventhelper">
-        <%= event.participants %>
-      </p>
+      <p style="display:none" id="eventhelper"><%- event.participants %></p>
       <% } %>
 
         <% if(user) {%>
-          <p style="display:none" id="eventhelper2">
-            <%= user.local.username %>
-          </p>
+          <p style="display:none" id="eventhelper2"><%- user.local.username %></p>
           <% } %>
 
             <div id="main-content" class="container">
