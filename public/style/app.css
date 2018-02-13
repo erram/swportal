@@ -541,7 +541,8 @@ h5 {
 .article-container .article {
   width: 100%;
   background: rgba(255, 255, 255, 0.7);
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  min-height: 157px; }
   @media (min-width: 496px) {
     .article-container .article.wide {
       width: 100%; } }
