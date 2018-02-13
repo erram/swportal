@@ -33,7 +33,7 @@ app.post("/news/update/:id", isLoggedIn, function (req, res) {
           return res.status(500).send(err)
         } else {
           console.log(newsitem._id + ' updated!');
-          res.redirect("/")
+          res.redirect("/profile")
         }
       })
     } else {
@@ -163,7 +163,7 @@ app.post("/news/save", isLoggedIn, function (req, res) {
     if (err) {
       res.send(err)
     } else {
-      res.redirect("/")
+      res.redirect("/profile")
     }
   })
 });
