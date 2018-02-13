@@ -26,6 +26,7 @@
                             <th>Cím</th>
                             <th>Dátum</th>
                             <th style="text-align:center"></th>
+                            <th style="text-align:center"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,7 +39,13 @@
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     <span><strong>Módosít</strong></span>            
                                 </a>
-                                </td>   
+                                </td>  
+                                <td>
+                                <div class="btn btn-danger a-btn-slide-text torles" id="<%- newsitem[i].ID %>">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Töröl</strong></span>            
+                                </div>
+                                </td> 
                             </tr>
                             <% } %>    
                         </tbody>
@@ -86,5 +93,27 @@
     </div>
 <% include footer %>
 <script src="js/app-min.js"></script>
+<script>
+$(".torles").click(function(){
+    
+})
+$.ajax
+({ 
+    url: '/admin/user/updatecomment',
+    data: {"userEmail": userEmail,"status":type},
+    type: 'post',
+    success: function(data)
+    {
+        $('.modal-box2').text("User státusa módosítva " +data).fadeIn(700, function() 
+        {
+            setTimeout(function() 
+        {
+        $('.modal-box2').fadeOut();
+            }, 2000);
+        });
+    }
+});
+
+</script>
 </body>
 </html>
