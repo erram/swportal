@@ -9,6 +9,9 @@
         p {
             font-size:14px;
         }
+        .article-box {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -18,8 +21,9 @@
         <div class="article-container">
 
             <% for(var i=0; i < newsitems.length; i++) { %>
+            <a class="navigate" href="/news/item/<%=newsitems[i].ID%>"></a>
                 <div class="article-box">
-
+                
                     <div class="blog-header">
                     <img class="blog-visual" src="/uploaded_images/<%=newsitems[i].coverimage%>"/>
                     <div class="blog-head">
@@ -45,12 +49,21 @@
                       </div>
                     </div>
                   </div>
-                  </div>
+                </div>
             <% } %> 
         </div>
     </div>
 
     <% include footer %>
 <script src="js/app-min.js"></script>
+<script>
+    $(".article-box").click(function(){
+        var link = $(this).prev()[0].href;
+        function pageRedirect() {
+        window.location.replace(link);
+        }      
+        setTimeout(pageRedirect, 100);
+    })
+</script>
 </body>
 </html>
