@@ -240,7 +240,7 @@ app.post("/news/uploadimage", function (req, res) {
       data.link = '/uploaded_images/' + req.files[0].path
       setTimeout(function () {
         res.status('200').send(data);
-      }, 2000)
+      }, 3000)
     }
 
   });

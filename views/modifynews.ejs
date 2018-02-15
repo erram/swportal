@@ -133,8 +133,11 @@
 
                                     success: function (response) {
                                         console.log(response)
-                                        $("#image").empty().append("<img src='../../uploaded_images/"+response+"' />");
+                                        setTimeout(function(){
+                                            $("#image").empty().append("<img src='../../uploaded_images/"+response+"' />");
                                          $("#status").empty()
+                                        }, 3000)
+                                        
                                         $("#hiddenimagename").val(response);
                                     }
                                 });
