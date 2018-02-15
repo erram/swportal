@@ -7,11 +7,12 @@ var Event = require('../models/events');
 var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js');
 var multer = require("multer");
 var ftpClient = require('ftp-client');
+var ftpStorage = require('multer-ftp')
 
 
 //Hír szerkeztő
 app.get("/news", isLoggedIn, isAdmin, function (req, res) {
-  res.render("news.ejs", {user:req.user})
+  res.render("news.ejs", { user: req.user })
 });
 
 app.post("/news/update/:id", isLoggedIn, function (req, res) {
@@ -53,33 +54,33 @@ app.get("/news/item/:id", function (req, res) {
         return res.status(500).send(err)
       } else {
         if (newsitem.Kategória === "Esemény") {
-          Event.findOne({"url":newsitem.ID}, function(err, itm) {
+          Event.findOne({ "url": newsitem.ID }, function (err, itm) {
             if (err) {
               console.log(err)
             } else {
               res.render("singlenews.ejs", {
-              newsitem: newsitem, 
-              user: req.user, 
-              comments: comments, 
-              moment: moment,
-              event: itm,
-              trunc: trunc
-             })
+                newsitem: newsitem,
+                user: req.user,
+                comments: comments,
+                moment: moment,
+                event: itm,
+                trunc: trunc
+              })
             }
-          })  
+          })
         } else {
           res.render("singlenews.ejs", {
-            newsitem: newsitem, 
-            user: req.user, 
-            comments: comments, 
+            newsitem: newsitem,
+            user: req.user,
+            comments: comments,
             moment: moment,
             event: null,
             trunc: trunc
-           })
+          })
         }
 
       }
-       
+
     })
   })
 });
@@ -89,7 +90,7 @@ app.get("/news/edit/:id", function (req, res) {
     if (err || !newsitem) {
       return res.status(500).send(err)
     }
-    res.render("modifynews.ejs", { newsitem: newsitem, user:req.user })
+    res.render("modifynews.ejs", { newsitem: newsitem, user: req.user })
   })
 });
 
@@ -116,12 +117,12 @@ app.post("/news/comment_delete/:id", function (req, res) {
 });
 
 app.post("/news/participant_delete/", function (req, res) {
-  Event.findOne({"id":req.body.eventid},function(err, event) {
-    if(err) {
+  Event.findOne({ "id": req.body.eventid }, function (err, event) {
+    if (err) {
       console.log(err);
       res.status(500).send(err);
     } else {
-      var temp = event.participants.filter(function(user){
+      var temp = event.participants.filter(function (user) {
         return user != req.body.username;
       })
 
@@ -131,7 +132,7 @@ app.post("/news/participant_delete/", function (req, res) {
         if (err) {
           res.send(err)
         } else {
-          res.redirect("/news/item/"+req.body.callback);
+          res.redirect("/news/item/" + req.body.callback);
         }
       })
     }
@@ -189,10 +190,10 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
         newsitem.commentcounter += 1;
         newsitem.save(function (err) {
           if (err) {
-            console.log('news:'+req.params.id+' '+'failed to increment counter!'+ err);
+            console.log('news:' + req.params.id + ' ' + 'failed to increment counter!' + err);
             return res.status(500).send(err)
           } else {
-            console.log('news:'+req.params.id+' '+'incremented counter!')
+            console.log('news:' + req.params.id + ' ' + 'incremented counter!')
           }
         })
       });
@@ -201,65 +202,69 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
   })
 });
 
-app.post("/news/uploadimage", function (req, res) {
-  // Store image.
-  FroalaEditor.Image.upload(req, 'public/uploaded_images/', function (err, data) {
-    data.link = data.link.replace('public/', '');
-    // Return data.
-    if (err) {
-      return res.send(JSON.stringify(err));
-    }
-    res.send(data);
-  });
-});
 
-var storage = multer.diskStorage({
-    destination: function(req, file, callback){
-        callback(null, 'public/uploaded_images'); // set the destination
+var upload = multer({
+  storage: new ftpStorage({
+    basepath: '/',
+    ftp: {
+      host: 's7.tarhely.com',
+      secure: false, // enables FTPS/FTP with TLS 
+      user: 'swsorsok@deltavision.hu',
+      password: 'swsorsok'
     },
-    filename: function(req, file, callback){
-        callback(null, Date.now() + '.jpg'); // set the file name and extension
+    destination: function (req, file, options, callback) {
+      callback(null, Date.now() + '.jpg') // custom file destination, file extension is added to the end of the path 
     }
-});
+  })
+}).any()
 
-var upload = multer({storage: storage}).single('userphoto');
 
-app.post('/news/cover',function(req,res){
-  upload(req,res,function(err) {
-      if(err) {
-          return res.send("Error uploading file."+err);
-      }
-
-      res.send(req.file.filename);
+app.post('/news/cover', function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      return res.send("Error uploading file." + err);
+    }
+    download();
+    console.log(req.files)
+    res.status(200).send(req.files[0].path);
   });
 });
 
-https://www.npmjs.com/package/multer-sftp
-https://github.com/noodny/node-ftp-client#examples
-var config = {
-        host: 'localhost',
-        port: 21,
-        user: 'anonymous',
-        password: 'anonymous@'
+app.post("/news/uploadimage", function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      return res.send("Error uploading file." + err);
+    } else {
+      download();
+      var data = {}
+      data.link = '/uploaded_images/' + req.files[0].path
+      setTimeout(function () {
+        res.status('200').send(data);
+      }, 2000)
     }
-var options = {
-        logging: 'basic'
-    }
-var client = new ftpClient(config, options);
 
-client.connect(function () {
-
-    client.upload(['test/**'], '/public_html/test', {
-        baseDir: 'test',
-        overwrite: 'older'
-    }, function (result) {
-        console.log(result);
-    });
-
-    client.download('/public_html/test2', 'test2/', {
-        overwrite: 'all'
-    }, function (result) {
-        console.log(result);
-    });
-
+  });
 });
+
+
+
+function download() {
+  var config = {
+    host: 's7.tarhely.com',
+    port: 21,
+    user: 'swsorsok@deltavision.hu',
+    password: 'swsorsok'
+  }
+  var options = {
+    logging: 'basic'
+  }
+  var client = new ftpClient(config, options);
+  client.connect(function () {
+    client.download('/', 'public/uploaded_images', {
+      overwrite: 'older'
+    }, function (result) {
+      console.log(result);
+    });
+
+  });
+}
