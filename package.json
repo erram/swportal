@@ -11,6 +11,7 @@
     "express": "~4.14.0",
     "express-session": "~1.14.1",
     "froala-editor": "^2.7.2",
+    "ftp-client": "^0.2.2",
     "method-override": "~2.3.6",
     "moment": "^2.19.3",
     "mongoose": "~4.13.1",

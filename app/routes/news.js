@@ -6,6 +6,7 @@ var Comment = require('../models/comment');
 var Event = require('../models/events');
 var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js');
 var multer = require("multer");
+var ftpClient = require('ftp-client');
 
 
 //Hír szerkeztő
@@ -137,8 +138,6 @@ app.post("/news/participant_delete/", function (req, res) {
   })
 });
 
-
-
 app.post("/news/save", isLoggedIn, function (req, res) {
   var dateTime = require('node-datetime');
   var dt = dateTime.create();
@@ -205,7 +204,6 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
 app.post("/news/uploadimage", function (req, res) {
   // Store image.
   FroalaEditor.Image.upload(req, 'public/uploaded_images/', function (err, data) {
-    console.log(data);
     data.link = data.link.replace('public/', '');
     // Return data.
     if (err) {
@@ -215,7 +213,6 @@ app.post("/news/uploadimage", function (req, res) {
   });
 });
 
-
 var storage = multer.diskStorage({
     destination: function(req, file, callback){
         callback(null, 'public/uploaded_images'); // set the destination
@@ -224,7 +221,9 @@ var storage = multer.diskStorage({
         callback(null, Date.now() + '.jpg'); // set the file name and extension
     }
 });
+
 var upload = multer({storage: storage}).single('userphoto');
+
 app.post('/news/cover',function(req,res){
   upload(req,res,function(err) {
       if(err) {
@@ -235,6 +234,32 @@ app.post('/news/cover',function(req,res){
   });
 });
 
-app.get("/newslist", function (req, res) {
+https://www.npmjs.com/package/multer-sftp
+https://github.com/noodny/node-ftp-client#examples
+var config = {
+        host: 'localhost',
+        port: 21,
+        user: 'anonymous',
+        password: 'anonymous@'
+    }
+var options = {
+        logging: 'basic'
+    }
+var client = new ftpClient(config, options);
+
+client.connect(function () {
+
+    client.upload(['test/**'], '/public_html/test', {
+        baseDir: 'test',
+        overwrite: 'older'
+    }, function (result) {
+        console.log(result);
+    });
+
+    client.download('/public_html/test2', 'test2/', {
+        overwrite: 'all'
+    }, function (result) {
+        console.log(result);
+    });
 
 });
