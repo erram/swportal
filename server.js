@@ -17,6 +17,7 @@ var configDB = require("./config/database.js");
 var News = require("./app/models/newsitem");
 var trunc = require("truncate");
 var moment = require("moment");
+var ftpClient = require('ftp-client');
 
 // configuration ===============================================================
 mongoose.connect(configDB.url);
@@ -66,6 +67,29 @@ app.get("/contacts", function(req, res){
 })
 
 require("./app/routes");
+download();
 app.listen(port);
 
 console.log("Server portja " + port);
+
+function download() {
+  var config = {
+    host: 's7.tarhely.com',
+    port: 21,
+    user: 'swsorsok@deltavision.hu',
+    password: 'swsorsok'
+  }
+  var options = {
+    logging: 'basic'
+  }
+  var client = new ftpClient(config, options);
+  client.connect(function () {
+    client.download('/', 'public/uploaded_images', {
+      overwrite: 'older'
+    }, function (result) {
+      console.log(result);
+    });
+
+  });
+}
+
