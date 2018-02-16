@@ -246,8 +246,6 @@ app.post("/news/uploadimage", function (req, res) {
   });
 });
 
-
-
 function download() {
   var config = {
     host: 's7.tarhely.com',
@@ -265,6 +263,5 @@ function download() {
     }, function (result) {
       console.log(result);
     });
-
   });
 }

@@ -47,6 +47,7 @@ app.use(passport.session()); // persistent login session
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 app.get("/", function(req, res) {
+  download();
   News.find({
     Publikálva: "true"
   })
