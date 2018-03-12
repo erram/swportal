@@ -4,7 +4,6 @@ var isAdmin = require("../utils/isadmin");
 var News = require('../models/newsitem');
 var Comment = require('../models/comment');
 var Event = require('../models/events');
-var FroalaEditor = require('wysiwyg-editor-node-sdk/lib/froalaEditor.js');
 var multer = require("multer");
 var ftpClient = require('ftp-client');
 var ftpStorage = require('multer-ftp')
@@ -186,8 +185,8 @@ app.post("/news/commentsave/:id", isLoggedIn, function (req, res) {
       res.send(err)
     } else {
       News.findOne({ "ID": req.params.id }, function (err, newsitem) {
-        console.log(newsitem);
-        newsitem.commentcounter += 1;
+        console.log(newsitem.ID);
+        newsitem.commentecounter += 1;
         newsitem.save(function (err) {
           if (err) {
             console.log('news:' + req.params.id + ' ' + 'failed to increment counter!' + err);
