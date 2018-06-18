@@ -92,5 +92,6 @@ function download() {
     });
 
   });
+  client.end();
 }
 

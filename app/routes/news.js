@@ -263,4 +263,6 @@ function download() {
       console.log(result);
     });
   });
+  client.end();
+
 }
