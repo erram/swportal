@@ -21,6 +21,16 @@ var ftpClient = require('ftp-client');
 
 // configuration ===============================================================
 mongoose.connect(configDB.url);
+var ftpconfig = {
+  host: 's7.tarhely.com',
+  port: 21,
+  user: 'swsorsok@deltavision.hu',
+  password: 'swsorsok'
+}
+var options = {
+  logging: 'basic'
+}
+var client = new ftpClient(ftpconfig, options);
 
 require("./config/passport")(passport); // pass passport for configuratio
 
@@ -74,16 +84,6 @@ app.listen(port);
 console.log("Server portja " + port);
 
 function download() {
-  var config = {
-    host: 's7.tarhely.com',
-    port: 21,
-    user: 'swsorsok@deltavision.hu',
-    password: 'swsorsok'
-  }
-  var options = {
-    logging: 'basic'
-  }
-  var client = new ftpClient(config, options);
   client.connect(function () {
     client.download('/', 'public/uploaded_images', {
       overwrite: 'older'
